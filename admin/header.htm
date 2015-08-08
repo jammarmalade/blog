@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>后台管理</title>
+    <link href="{CSSDIR}/bootstrap.css" rel="stylesheet">
+	<link href="{CSSDIR}/admin.css" rel="stylesheet">
+    <!--[if lt IE 9]>
+      <script src="http://libs.useso.com/js/html5shiv/3.7/html5shiv.min.js"></script>
+      <script src="http://libs.useso.com/js/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+	<script src="{JSDIR}/jquery.min.js"></script>
+    <script src="{JSDIR}/bootstrap.min.js"></script>
+	<script src="{JSDIR}/common.js"></script>
+	<script src="{JSDIR}/admin.js"></script>
+	<style type="text/css">
+
+	</style>
+  </head>
+  <body class="bg1">
+
+
+	  <div class="container mywidth">
+		<div class="row bgrgba mynav">
+			<div>
+				<ul class="nav nav-pills">
+				  <li role="presentation"><a href="{$_B['siteurl']}">首页</a></li>
+				  <!--{foreach $topmenu $k $v}-->
+					<li role="presentation" {$menu_active[$k]}><a href="admin.php?action={$k}">$v</a></li>
+				  <!--{/foreach}-->
+				</ul>
+
+			</div>
+			
+		</div>
+		
+	  </div>
+
+	  <!-- sidebar -->
+
+	  <div class="container">
+		<div class="row" style="margin-top:10px;">
+			<div class="col-md-2 text-center">
+				<ul class="nav nav-pills nav-stacked">
+					<!--{foreach $sidemenu[$action] $k $v}-->
+						<li role="presentation" {$side_active[$k]}><a href="admin.php?action={$action}&do={$k}">$v</a></li>
+					<!--{/foreach}-->
+				</ul>
+			</div>
+			<!-- action page -->
+			<!--{eval include display("$action",1);}-->
+		</div>
+	  </div>

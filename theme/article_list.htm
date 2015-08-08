@@ -1,0 +1,34 @@
+<!--{display header}-->
+	<div class="container" >
+		<div class="row" style="margin-top:20px;">
+		  <div class="col-xs-12 col-sm-6 col-md-8" style="padding:0px 30px;">
+		  <!-- article list -->
+		 <!--{foreach $articles $k $v}-->
+			<div class="row row-bottom">
+			  <a href="{$v['link']}" target="_blank" class="list-link"><h3>$v['subject']</h3></a>
+			  <div class="list-content clearfix">
+			    <!--{if $imgids[$v['aid']]}-->
+				  <div class="list-img"><a href="{$v['link']}" target="_blank"><img src="{IMGDIR}l.gif" class="lazy" data-original="{$imgids[$v['aid']]}"></a></div>
+				<!--{/if}-->
+				<div>$v['content']</div>
+			  </div>
+			  <div class="list-tip">
+			    <span><a href="{$v['link']}" target="_blank" class="list-tip-link" title="{$v['time']}">$v['formattime']</a></span>
+				<span>$v['author']</span> 
+				<!--{if $v['like']}--><span>$v['like'] 赞</span><!--{/if}-->
+				<!--{if $v['comments']}--><span>$v['comments'] 条评论</span><!--{/if}-->
+			  </div>
+			</div>
+		 <!--{/foreach}-->
+		 <!-- / article list -->
+		
+		  <!-- page -->
+			$pagehtml
+
+		  </div>
+
+		  
+		 <!--{display sidebar}-->
+
+	</div>
+<!--{display footer}-->

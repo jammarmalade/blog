@@ -1,0 +1,27 @@
+<!--{display header}-->
+	
+<div class="container container-article-new">
+
+	<div class="subject-article-new">
+		<h4>文章标题（80个字符）</h4>
+		<input type="text" class="form-control" id="subject" autocomplete="off" value="$article[subject]">
+	</div>
+
+
+	<link rel="stylesheet" href="{CSSDIR}/font-awesome.min.css" />
+	<link rel="stylesheet" type="text/css" href="{CSSDIR}/summernote.min.css" />
+	<script src="{JSDIR}/summernote.js"></script>
+    <script src="{JSDIR}/summernote-zh-CN.js"></script>
+	<script type="text/javascript">
+		var defaultcontent='$defaultcontent';
+	</script>
+	<script src="{JSDIR}/article-new.js"></script>
+
+	<div id="article_content"></div>
+	
+	<div class="submit-div">
+		<button type="button" class="btn btn-primary" action-type="article-new"><!--{if $_GET['do']=='new'}-->发布文章 <!--{else}--> 提交修改<!--{/if}--> </button>
+	</div>
+</div>
+
+<!--{display footer}-->
