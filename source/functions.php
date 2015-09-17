@@ -112,7 +112,7 @@ function loadcache($cachenames) {
 }
 
 //引入模版
-function display($tname,$admin=0){
+function display($tname,$admin=0,$return=false,$data=array()){
 	require_once 'jam_template.php';
 	$template = new template();
 	if($admin){
@@ -122,7 +122,18 @@ function display($tname,$admin=0){
 		$tplpath=BLOG_ROOT.'/theme/'.$tname.'.htm';
 		$tplcachepath=BLOG_ROOT.'/data/tplcache/'.$tname.'.tpl.php';
 	}
-	return $template->display($tname,$tplpath,$tplcachepath);
+	$viewFile = $template->display($tname,$tplpath,$tplcachepath);
+	if($return){
+		extract($data);
+		if(!ob_start($_B['allowgzip'] ? 'ob_gzhandler' : null)) {
+			ob_start();
+		}
+		ob_implicit_flush(false);//缓存输出，不flush到浏览器
+		require($viewFile);
+		return ob_get_clean();
+	}else{
+		return $viewFile;
+	}
 }
 
 //是否是手机
@@ -168,17 +179,19 @@ function checkmobile() {
 }
 
 //输出json
-function jsonOutput($res){
+function jsonOutput($status,$res=''){
 //	header("Content-type:application/json;charset=UTF-8");
-	echo json_encode($res);
+	$return['status']=$status;
+	$return['data']=$res;
+	echo json_encode($return);
 	exit(); 
 }
 
 function fput($data,$isarr=0){
 	if($isarr){
-		file_put_contents('d:/log.log',var_export($data,true).PHP_EOL,FILE_APPEND);
+		file_put_contents(BLOG_ROOT.'/log.log',var_export($data,true).PHP_EOL,FILE_APPEND);
 	}else{
-		file_put_contents('d:/log.log',$data.PHP_EOL,FILE_APPEND);
+		file_put_contents(BLOG_ROOT.'/log.log',$data.PHP_EOL,FILE_APPEND);
 	}
 }
 //验证用户名

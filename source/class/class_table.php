@@ -7,8 +7,8 @@ class class_table {
 
 	}
 	
-	function find_by_pk($uid){
-		return DB::fetch_first('SELECT * FROM %t WHERE %i=%s',array($this->_table,$this->_pk,$uid));
+	function find_by_pk($id,$field='*'){
+		return DB::fetch_first('SELECT %i FROM %t WHERE %i=%s',array($field,$this->_table,$this->_pk,$id));
 	}
 
 	function find_by_field($field,$val){

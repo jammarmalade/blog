@@ -1,0 +1,9 @@
+User-agent: *
+Disallow: /admin/
+Disallow: /asset/
+Disallow: /source/
+Disallow: /config/
+Disallow: /data/
+Disallow: /theme/
+Disallow: /admin.php
+Disallow: /index.php?mod=comment*

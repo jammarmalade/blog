@@ -35,7 +35,7 @@ class jam_application {
 	private function _init_env() {
 		error_reporting(E_ERROR);
 		define('MAGIC_QUOTES_GPC', function_exists('get_magic_quotes_gpc') && get_magic_quotes_gpc());// ' " \ NULL 等字符转义 当magic_quotes_gpc=On的时候，函数get_magic_quotes_gpc()就会返回1
-		define('GZIP', function_exists('ob_gzhandler'));
+		define('GZIP', function_exists('ob_gzhandler'));// ob 缓存压缩输出
 
 		if(function_exists('date_default_timezone_set')) {
 			@date_default_timezone_set('Etc/GMT-8');//东八区 北京时间
@@ -141,6 +141,7 @@ class jam_application {
 		}
 
 		$allowgzip = $this->config['output']['gzip'] && empty($this->b['inajax']) && GZIP;
+		$this->b['allowgzip'] = $allowgzip;//ajax 请求返回时会用到
 		if(!ob_start($allowgzip ? 'ob_gzhandler' : null)) {//之前不能有输出
 			ob_start();
 		}

@@ -13,4 +13,11 @@
 	</div>
 
 	<textarea class="form-control" rows="5" style="resize:vertical;" id="<?php echo $areaid;?>"></textarea>
+	<div class="clearfix edit-bottom">
+		<div class="submit-div">
+			<span class="editor-notice"></span>
+			<button type="button" class="btn btn-primary" id="<?php echo $editid;?>">评论</button>
+		</div>
+		<div class="edit-bottom-left"></div>
+	</div>
 </div>

@@ -21,8 +21,8 @@ switch($do){
 		}
 		$regbtn=$_GET['regbtn'];
 		if($_B['ajax'] && $regbtn){
-			$return['status']=1;
-			$return['data']='';
+			$status=1;
+			$data='';
 
 			$username=trim($_GET['username']);
 			$email=trim($_GET['email']);
@@ -31,31 +31,31 @@ switch($do){
 			$autologin=trim($_GET['autologin']);
 			
 			if($pwd!=$pwd2){
-				$return['status']=2;
-				$return['data']['msg']='两次输入的密码不一致';
-				$return['data']['id']='pwd2';
+				$status=2;
+				$data['msg']='两次输入的密码不一致';
+				$data['id']='pwd2';
 			}
-			if($return['status']==1 && !check_username($username)){
-				$return['status']=2;
-				$return['data']['msg']='昵称包含敏感字符';
-				$return['data']['id']='username';
+			if($status==1 && !check_username($username)){
+				$status=2;
+				$data['msg']='昵称包含敏感字符';
+				$data['id']='username';
 			}
-			if($return['status']==1 && !check_email($email)){
-				$return['status']=2;
-				$return['data']['msg']='Email 格式不对';
-				$return['data']['id']='email';
+			if($status==1 && !check_email($email)){
+				$status=2;
+				$data['msg']='Email 格式不对';
+				$data['id']='email';
 			}
-			if($return['status']==1 && J::t('users')->find_by_field('username',$username)){
-				$return['status']=2;
-				$return['data']['msg']='该昵称已被注册';
-				$return['data']['id']='username';
+			if($status==1 && J::t('users')->find_by_field('username',$username)){
+				$status=2;
+				$data['msg']='该昵称已被注册';
+				$data['id']='username';
 			}
-			if($return['status']==1 && J::t('users')->find_by_field('email',$email)){
-				$return['status']=2;
-				$return['data']['msg']='该 Email 已被注册';
-				$return['data']['id']='email';
+			if($status==1 && J::t('users')->find_by_field('email',$email)){
+				$status=2;
+				$data['msg']='该 Email 已被注册';
+				$data['id']='email';
 			}
-			if($return['status']==1){//开始注册
+			if($status==1){//开始注册
 				$salt=random(6);
 				$md5pwd=md5($pwd);
 				$realpwd=md5($md5pwd.$salt);
@@ -78,37 +78,31 @@ switch($do){
 						$cookietime=2952000;
 					}
 					setloginstatus($insert,$cookietime);
-					$return['data']['msg']='注册成功';
+					$data['msg']='注册成功';
 				}else{
-					$return['status']=2;
-					$return['data']['msg']='注册失败，请刷新重试';
-					$return['data']['id']='error';
+					$status=2;
+					$data['msg']='注册失败，请刷新重试';
+					$data['id']='error';
 				}
 			}
-			jsonOutput($return);
+			jsonOutput($status,$data);
 		}
 		break;
 	case 'login':
-		$return['status']=1;
-		$return['data']='';
 		if($_B['uid']){//若是已登录的
-			jsonOutput($return);
+			jsonOutput(1);
 		}
 		if($_B['ajax'] && $_GET['loginbtn']){
 			$username=trim($_GET['username']);
 			$pwd=trim($_GET['pwd']);
 			$autologin=trim($_GET['autologin']);
 			if($username=='' || $pwd==''){
-				$return['status']=2;
-				$return['data']='用户名或密码不能为空';
-				jsonOutput($return);
+				jsonOutput(2,'用户名或密码不能为空');
 			}
 			//失败次数 登录错误在十分钟内 且大于等于5次
 			if($failed=J::t('loginfailed')->fetch_ip($_B['clientip'])){
 				if((TIMESTAMP - $failed['lastupdate']) < 600 && $failed['count']>=5){
-					$return['status']=2;
-					$return['data']='错误次数太多，请 10 分钟后再试';
-					jsonOutput($return);
+					jsonOutput(2,'错误次数太多，请 10 分钟后再试';);
 				}
 			}
 			if($uinfo=J::t('users')->login($username)){
@@ -124,44 +118,40 @@ switch($do){
 						);
 						J::t('loginfailed')->insert($insert);
 					}
-					$return['status']=2;
-					$return['data']='用户名或密码错误';
-					jsonOutput($return);
+					jsonOutput(2,'用户名或密码错误');
 				}else{
 					$cookietime=86400;
 					if($autologin){
 						$cookietime=2952000;
 					}
 					setloginstatus($uinfo,$cookietime);
-					jsonOutput($return);
+					jsonOutput(1);
 				}
 			}else{
-				$return['status']=2;
-				$return['data']='用户名或密码错误';
-				jsonOutput($return);
+				jsonOutput(2,'用户名或密码错误');
 			}
 			
 		}
 		break;
 	case 'check':
-		$return['status']=1;
-		$return['data']='';
+		$status=1;
+		$data='';
 		if(empty($_GET['type']) || empty($_GET['data']) || !in_array(trim($_GET['type']),array('username','email'))){
 			
 		}else{
 			$func=$_GET['type']=='username' ? 'check_username' : 'check_email';
 			if(!$func($_GET['data'])){
-				$return['status']=2;
-				$return['data']['msg']= $_GET['type']=='username' ? '昵称包含敏感字符' :  'Email 格式不对';
+				$status=2;
+				$data['msg']= $_GET['type']=='username' ? '昵称包含敏感字符' :  'Email 格式不对';
 			}
-			if($return['status']==1 && (J::t('users')->find_by_field($_GET['type'],$_GET['data']))){
-				$return['status']=2;
-				$return['data']['msg']=$_GET['type']=='username' ? '该昵称已被注册' :  '该 Email 已被注册';
+			if($status==1 && (J::t('users')->find_by_field($_GET['type'],$_GET['data']))){
+				$status=2;
+				$data['msg']=$_GET['type']=='username' ? '该昵称已被注册' :  '该 Email 已被注册';
 			}
-			$return['data']['type']=$_GET['type'];
+			$data['type']=$_GET['type'];
 		}
-		$return['data']['val']=$_GET['data'];
-		jsonOutput($return);
+		$data['val']=$_GET['data'];
+		jsonOutput($status,$data);
 		break;
 	case 'logout':
 		foreach($_B['cookie'] as $k => $v) {

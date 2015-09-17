@@ -60,7 +60,7 @@ function ubb2html($content,$attach=0,$type){
 		"/\[quote\](.+?)\[\/quote\]/i",
 		"/\[h3\](.+?)\[\/h3\]/i",
 		"/\[url=([^\]]+?)\](.+?)\[\/url\]/i",
-		"/\[(b|i|u)\](.+?)\[\/\\1\]/i",
+		"/\[(b|i|u|kbd)\](.+?)\[\/\\1\]/i",
 		"/\[hr\]/i",
 		"/\[img=([^\]]+?)\]/i",
 	), array(
@@ -102,4 +102,13 @@ function ubb2html($content,$attach=0,$type){
 
 	//<img src="{IMGDIR}l.gif" class="lazy" data-original="{$imgids[$v['aid']]}">
 	return $content;
+}
+
+//评论内容过滤
+function commentubb($content){
+	if($content==''){
+		return '';
+	}
+	
+	return htmlspecialchars(strip_tags($content));
 }

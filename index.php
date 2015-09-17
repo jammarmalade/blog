@@ -7,7 +7,7 @@ require './source/jam_core.php';
 
 $m=$_GET['m'];
 $do=$_GET['do'];
-$marr=array('article','user','upload');
+$marr=array('article','user','upload','comment');
 if(!in_array($m,$marr)){
 	$m='article';
 }

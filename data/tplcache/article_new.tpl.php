@@ -16,7 +16,7 @@
 	<script src="<?php echo JSDIR;?>/article-new.js"></script>
 
 	<div id="article_content"></div>
-
+	
 	<div class="submit-div">
 		<button type="button" class="btn btn-primary" action-type="article-new"><?php if($_GET['do']=='new') { ?>发布文章 <?php } else { ?> 提交修改<?php } ?> </button>
 	</div>

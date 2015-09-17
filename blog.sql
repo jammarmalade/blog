@@ -2,15 +2,15 @@
 Navicat MySQL Data Transfer
 
 Source Server         : 本地
-Source Server Version : 50612
+Source Server Version : 50520
 Source Host           : localhost:3306
 Source Database       : blog
 
 Target Server Type    : MYSQL
-Target Server Version : 50612
+Target Server Version : 50520
 File Encoding         : 65001
 
-Date: 2015-08-01 18:02:27
+Date: 2015-08-20 21:51:14
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -39,7 +39,7 @@ CREATE TABLE `pre_article` (
 -- ----------------------------
 -- Records of pre_article
 -- ----------------------------
-INSERT INTO `pre_article` VALUES ('2', '0', '恻恻恻恻恻恻', '[div][/div][div]\n[attach]25[/attach][/div][div]\n[/div][div]啊死擦死擦死擦死擦洒洒[div]\n[/div][quote]擦撒擦拭[/quote][h3]擦撒擦拭[/h3][div][b]撒擦拭擦拭从[/b][i]萨斯擦拭擦拭擦[/i][u]拭擦拭擦拭擦[/u]拭擦拭擦[/div][div]\n[/div][div][url=https://www.baidu.com/]链接[/url]&nbsp; &nbsp; csaas&nbsp;[/div][hr][div]\n[/div][div][/div][div]cash曾经撒茶水间[/div][div]\n[/div][div]\n[/div][div]啊擦死[/div]', '1', 'admin', '0', '0', '0', '25', '1436426840', '1', '1');
+INSERT INTO `pre_article` VALUES ('2', '0', '恻恻恻恻恻恻', '[/div][div]\n[attach]25[/attach][/div][div]\n[/div][div]啊死擦死擦死擦死擦洒洒[div]\n[/div][quote]擦撒擦拭[/quote][h3]擦撒擦拭[/h3][div][b]撒擦拭擦拭从[/b][i]萨斯擦拭擦拭擦[/i][u]拭擦拭擦拭擦[/u]拭擦拭擦[/div][div]\n[/div][div][url=https://www.baidu.com/]链接[/url]&nbsp; &nbsp; csaas&nbsp;[/div][hr][div]\n[/div][div][/div][div]cash曾经撒茶水间[/div][div]\n[/div][div]\n[/div][div]啊擦死[/div]', '1', 'admin', '0', '0', '0', '25', '1436426840', '1', '1');
 INSERT INTO `pre_article` VALUES ('3', '0', 'cececcececeeeeee', '[div][/div][div]\n[attach]25[/attach][/div][div]\n[/div][div]啊死擦死擦死擦死擦洒洒[div]\n[/div][quote]擦撒擦拭[/quote][h3]擦撒擦拭[/h3][div][b]撒擦拭擦拭从[/b][i]萨斯擦拭擦拭擦[/i][u]拭擦拭擦拭擦[/u]拭擦拭擦[/div][div]\n[/div][div][url=https://www.baidu.com/]链接[/url]&nbsp; &nbsp; csaas&nbsp;[/div][hr][div]\n[/div][div][/div][div]cash曾经撒茶水间[/div][div]\n[/div][div]\n[/div][div]啊擦死[/div]', '1', 'admin', '0', '0', '0', '0', '1436427142', '1', '1');
 INSERT INTO `pre_article` VALUES ('6', '0', '测试测试', '[div]&lt;script&gt;alert(\'OK\')&lt;/script&gt;[/div][div]啊哈哈哈哈啊[/div]', '1', 'admin', '0', '0', '0', '0', '1436511170', '1', '1');
 INSERT INTO `pre_article` VALUES ('7', '0', '测试测试', '[div]&lt;script&gt;alert(\'OK\')&lt;/script&gt;[/div][div]啊哈哈哈哈啊[/div]', '1', 'admin', '0', '0', '0', '0', '1436511180', '1', '1');
@@ -65,13 +65,22 @@ CREATE TABLE `pre_comment` (
   `content` text CHARACTER SET utf8 NOT NULL,
   `dateline` int(10) NOT NULL,
   `like` int(10) unsigned NOT NULL DEFAULT '0',
+  `classify` char(10) CHARACTER SET utf8 NOT NULL DEFAULT 'article',
   `status` tinyint(1) unsigned NOT NULL DEFAULT '1',
   PRIMARY KEY (`cid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of pre_comment
 -- ----------------------------
+INSERT INTO `pre_comment` VALUES ('1', '0', '0', '', '2', '1', 'admin', '阿斯报出卡死不参加as，阿塞[b]拜疆啊[/b]', '1439094966', '0', 'article', '1');
+INSERT INTO `pre_comment` VALUES ('2', '1', '1', 'admin', '2', '2', 'test', '啊世博会曾[code]经卡萨诺[/code]', '1439097774', '0', 'article', '1');
+INSERT INTO `pre_comment` VALUES ('3', '0', '0', '', '2', '1', 'admin', '啊死[kbd]擦死[/kbd]', '1439099614', '0', 'article', '1');
+INSERT INTO `pre_comment` VALUES ('4', '0', '0', '', '2', '1', 'admin', 'asfa短发[quote]阿斯擦[/quote]啊是大是大[b]阿斯达[/b]\n啊死擦死[code]阿斯达斯夫妇[/code]', '1439101745', '0', 'article', '1');
+INSERT INTO `pre_comment` VALUES ('5', '0', '0', '', '2', '1', 'admin', '撒旦撒打算', '1439101828', '0', 'article', '1');
+INSERT INTO `pre_comment` VALUES ('6', '0', '0', '', '2', '1', 'admin', '阿斯达斯飞洒发送\n参赛健康\n阿斯擦你看见啊岁', '1439101868', '0', 'article', '1');
+INSERT INTO `pre_comment` VALUES ('7', '2', '2', 'test', '2', '1', 'admin', '测试回复，哈哈哈哈哈', '1439261356', '0', 'article', '1');
+INSERT INTO `pre_comment` VALUES ('8', '2', '2', 'test', '2', '1', 'admin', '再测一下，回复 test', '1439261551', '0', 'article', '1');
 
 -- ----------------------------
 -- Table structure for `pre_image`

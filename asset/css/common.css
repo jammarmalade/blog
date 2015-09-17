@@ -60,7 +60,6 @@ body{
 	margin:15px 0;
 }
 .submit-div{
-	margin-top:10px;
 	float:right;
 }
 .list-link:hover{
@@ -93,4 +92,21 @@ body{
 .shownotice{
 	border-radius:5px;
 	border:1px solid #cecece;
+}
+.editor-notice{
+	color:red;
+	margin-right:10px;
+}
+.com-tip{
+	color:#999;
+}
+.com-tip span{
+	margin:0px 10px;
+}
+.com-tip a{
+	color:#999;
+}
+.edit-bottom div{
+	margin-top:10px;
+	display:inline-block;
 }

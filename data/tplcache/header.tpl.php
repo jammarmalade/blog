@@ -21,7 +21,7 @@
   <body>
 
     <div class="container page-header">
-	  <h2><?php echo $_B['setting']['blog']['blogName'];?><small><?php echo $_B['setting']['blog']['blogSubhead'];?></small></h2>
+	  <h2><?php echo $_B['setting']['blog']['blogName'];?><small style="margin-left:10px;"><?php echo $_B['setting']['blog']['blogSubhead'];?></small></h2>
 	</div>
     <nav class="navbar navbar-inverse navbar-fixed-top bgrgba" role="navigation">
 	  <div class="container">

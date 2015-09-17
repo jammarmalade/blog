@@ -54,25 +54,36 @@ switch($do){
 		$article['content']=ubb2html($article['content'],$aidattach);
 		$article['formattime']=btime($article['dateline'],1);
 		$article['time']=btime($article['dateline']);
+		//获取评论
+		$comlimit=30;
+		$comlist=J::t('comment')->fetch_list('*',"classify='article' AND aid=$aid AND `status`=1",0,$comlimit);
+		$next=0;
+		if($comlist){
+			foreach($comlist as $k=>$v){
+				$comlist[$k]['formattime']=btime($v['dateline'],1);
+				$comlist[$k]['time']=btime($v['dateline']);
+				$comlist[$k]['avatar']=IMGDIR.'jam.png';
+				$comlist[$k]['content']=ubb2html($v['content']);
+			}
+			if(count($comlist)>=$comlimit){
+				$next=1;
+			}
+		}
 
 		$navtitle=$article['subject'].' - '.$article['author'];
 		break;
 	case 'new':
 		if($_B['ajax'] && $_GET['type']=='new'){
-			$return['status']=1;
-			$return['data']='';
+			$status=1;
+			$data='';
 			if(!$_B['uid']){
-				$return['status']=2;
-				$return['data']='login';
-				jsonOutput($return);
+				jsonOutput(2,'login');
 			}
 			$subject=$_GET['subject'];
 			$content=$_GET['content'];
 
 			if($subject=='' || $content==''){
-				$return['status']=2;
-				$return['data']='标题或内容不能为空';
-				jsonOutput($return);
+				jsonOutput(2,'标题或内容不能为空');
 			}
 			//以后添加审核内容关键词
 
@@ -98,17 +109,17 @@ switch($do){
 					'aid'=>$aid,
 					'status'=>1
 				),"uid=".$_B['uid']." AND id IN($str_ids)");
-				$return['data']=$_B['siteurl'].'index.php?m=article&do=view&id='.$aid;
+				$data=$_B['siteurl'].'index.php?m=article&do=view&id='.$aid;
 			}else{
 				if(!$aid){
-					$return['status']=2;
-					$return['data']='添加失败';
+					$status=2;
+					$data='添加失败';
 				}else{
-					$return['data']='添加成功';
+					$data='添加成功';
 				}
 			}
 
-			jsonOutput($return);
+			jsonOutput($status,$data);
 		}
 		if(!$_B['uid']){
 			shownotice('请先登录',array('referer'=>$_B['referer']));

@@ -176,14 +176,142 @@ $(function(){
 	$('.dropdown').unbind("mouseout").mouseout(function(){
 		$(this).removeClass('open');
 	})
-})
 
+	//add comment
+	$('#addcomment').unbind("click").click(function(){
+		var aid=$('#article_subject').attr('data');
+		var content=$('#comment_edit').val();
+		content=strip_tags(content);
+		content=content.replace(/&nbsp;/g, '');
+		if(content==''){
+			alert('评论内容不能为空');
+			return false;
+		}
+		var rcid=$(this).attr('data');
+		var data={aid:aid,content:content,rcid:rcid};
+		var url='index.php?m=comment&do=add';
+		_ajax(url,data,function(res){
+			callback_addcomment(res);
+		});
+		return false;
+	})
+	function callback_addcomment(res){
+		ajaxSending=false;
+		res=eval("("+res+")");
+		if(res['status']==-1){
+			alert('请求失败');
+			return false;
+		}
+		if(res['status']==1){
+			$('#comment_edit').val('');
+			$('.no-conmment').remove();
+			$('.comments-list').append(res['data']);
+		}else{
+			$('.editor-notice').text(res['data']);
+		}
+	}
+	//load more
+	$('.loadmore').unbind("click").click(function(){
+		var dom=$(this);
+		var url=dom.attr('data');
+		if(url==''){
+			alert('请求失败');
+			return false;
+		}
+		dom.text('正在加载...');
+		dom.attr('disabled',true);
+
+		_ajax(url,'',function(res){
+			callback_getcomment(res);
+		});
+
+	})
+	function callback_getcomment(res){
+		var dom=$('.loadmore');
+		ajaxSending=false;
+		res=eval("("+res+")");
+		if(res['status']==-1){
+			alert('请求失败');
+			return false;
+		}
+		if(res['status']==1){
+			$('.comments-list').append(res['data']['content']);
+			//reset bind
+			$('.com-tip-recom').unbind("click").click(function(){
+				reply_comment($(this));
+			})
+			$('.com-tip-like').unbind("click").click(function(){
+				zan_comment($(this));
+			})
+			if(res['data']['next']==''){
+				dom.remove();
+				return true;
+			}
+		}else{
+			alert(res['data']);
+		}
+		dom.text('加载更多');
+		dom.attr('data',res['data']['next']);
+		dom.attr('disabled',false);
+	}
+	//reply comment
+	$('.com-tip-recom').unbind("click").click(function(){
+		reply_comment($(this));
+	})
+	//zan comment
+	$('.com-tip-like').unbind("click").click(function(){
+		zan_comment($(this));
+	})
+	function zan_comment(dom){
+		var cid=dom.attr('data');
+		var data={cid:cid};
+		var url='index.php?m=comment&do=zan';
+		_ajax(url,data,function(res){
+			ajaxSending=false;
+			res=eval("("+res+")");
+			if(res['status']==-1){
+				alert('请求失败');
+				return false;
+			}
+			if(res['status']==1){
+				var num=dom.find('span').text();
+				if(num==''){
+					num = 1;
+				}else{
+					if(res['data']==1){
+						num = parseInt(num)+1;
+					}else if(res['data']==-1){
+						if(num!=0){
+							num = parseInt(num)-1;
+						}
+					}
+				}
+				dom.find('span').text(num);
+			}else{
+				alert(res['data']);
+			}
+		});
+	}
+	
+})
+function reply_comment(dom){
+	var cid=dom.attr('data');
+	var author=dom.parents('.media-body').find('.com-author').text();
+	$('#addcomment').attr('data',cid);
+	var html='<span style="color:#c1c1c1;">回复<span style="margin:0px 10px;">'+author+'</span><a href="javascript:;" onclick="removereply(this);">X</a></span>';
+	$('.edit-bottom-left').html(html);
+}
+
+function removereply(dom){
+	$('#addcomment').attr('data','');
+	$(dom).parents('.edit-bottom-left').html('');
+}
 //仿php in_array
 function in_array(needle, haystack) {
 	if(typeof needle == 'string' || typeof needle == 'number') {
 		for(var i in haystack) {
 			if(haystack[i] == needle) {
-					return true;
+				return true;
 			}
 		}
 	}
