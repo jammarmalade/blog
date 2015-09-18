@@ -10,7 +10,6 @@ if(!in_array($do,$doarr)){
 	$do='reg';
 }
 
-
 switch($do){
 	case 'reg':
 		if($_B['uid']){//若是已登录的
@@ -102,7 +101,7 @@ switch($do){
 			//失败次数 登录错误在十分钟内 且大于等于5次
 			if($failed=J::t('loginfailed')->fetch_ip($_B['clientip'])){
 				if((TIMESTAMP - $failed['lastupdate']) < 600 && $failed['count']>=5){
-					jsonOutput(2,'错误次数太多，请 10 分钟后再试';);
+					jsonOutput(2,'错误次数太多，请 10 分钟后再试');
 				}
 			}
 			if($uinfo=J::t('users')->login($username)){
@@ -165,13 +164,6 @@ switch($do){
 		break;
 }
 
-
-
-
-$limit=10;
-$start=$_B['page'] * $limit;
-
-//$articles=J::t('article')->fetch_all($start,$limit);
 
 include display('user_reg');
 ?>

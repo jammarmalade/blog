@@ -4,6 +4,7 @@ define('BLOG_ROOT', dirname(__FILE__));
 define('CUR_T', 'admin');
 require './source/jam_core.php';
 
+checkLogin();
 $action=$_GET['action'];
 $do=$_GET['do'];
 

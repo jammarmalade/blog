@@ -12,9 +12,7 @@ if(!in_array($do,$doarr)){
 }
 
 if($do=='add'){
-	if(!$_B['uid']){
-		jsonOutput(2,'login');
-	}
+	checkLogin();
 	if($_B['ajax']){
 		require_once libfile('article');
 		$aid = $_GET['aid'] ? $_GET['aid'] : '';

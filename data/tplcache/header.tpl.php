@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title><?php if($navtitle) { ?><?php echo $navtitle;?><?php } else { ?><?php echo $_B['setting']['blog']['blogName'];?><?php } ?></title>
+    <title><?php if($_B['navtitle']) { ?><?php echo $_B['navtitle'];?><?php } else { ?><?php echo $_B['setting']['blog']['blogName'];?><?php } ?></title>
 	<meta name="keywords" content="">
 	<meta name="description" content="<?php echo $_B['setting']['blog']['blogName'];?>-->">
     <link href="<?php echo CSSDIR;?>/bootstrap.css" rel="stylesheet">

@@ -38,7 +38,7 @@ switch($do){
 		$count=J::t('article')->fetch_count();
 		$pagehtml=page($count,$_B['page'],$limit,'index.php?m=article&do=list');
 
-		$navtitle=$_B['setting']['blog']['blogName'].' - 列表';
+		$_B['navtitle']=$_B['setting']['blog']['blogName'].' - 列表';
 		break;
 	case 'view':
 		$aid=$_GET['aid'] ? : 0;
@@ -70,7 +70,7 @@ switch($do){
 			}
 		}
 
-		$navtitle=$article['subject'].' - '.$article['author'];
+		$_B['navtitle']=$article['subject'].' - '.$article['author'];
 		break;
 	case 'new':
 		if($_B['ajax'] && $_GET['type']=='new'){
@@ -121,10 +121,8 @@ switch($do){
 
 			jsonOutput($status,$data);
 		}
-		if(!$_B['uid']){
-			shownotice('请先登录',array('referer'=>$_B['referer']));
-		}
-		$navtitle=$_B['setting']['blog']['blogName'].' - 写文章';
+		checkLogin();
+		$_B['navtitle']=$_B['setting']['blog']['blogName'].' - 写文章';
 		$defaultcontent='';
 		break;
 	case 'update':
@@ -145,7 +143,7 @@ switch($do){
 			shownotice('无权编辑该文章',array('referer'=>$_B['referer']));
 		}
 
-		$navtitle='编辑文章 - '.$article['subject'];
+		$_B['navtitle']='编辑文章 - '.$article['subject'];
 
 		$aidattach = $article['image'] ? $article['aid'] : 0;
 		$defaultcontent=ubb2html($article['content'],$aidattach,'update');

@@ -16,9 +16,7 @@ $upload=new class_upload();
 
 switch($do){
 	case 'article-new':
-		if(!$_B['uid']){
-			jsonOutput(2,'login');
-		}
+		checkLogin();
 		$upload->init($_FILES['file'],'article','data/attachment');
 		$file=&$upload->file;
 		

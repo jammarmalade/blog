@@ -551,8 +551,22 @@ function cache($path,$data=''){
 }
 //错误提示
 function shownotice($msg,$ext=array()){
-	
+	global $_B;
 	include display('shownotice');
 	exit();
+}
+//登录检查
+function checkLogin($msg=''){
+	global $_B;
+	if(!$_B['uid']){
+		if($_B['ajax']){
+			jsonOutput(2,'login');
+		}else{
+			$msg = $msg =='' ? '请先登录' : $msg;
+			$_B['navtitle'] = '提示 - '.$msg;
+			shownotice($msg,array('referer'=>$_B['referer']));
+		}
+	}
+	return true;
 }
 ?>
