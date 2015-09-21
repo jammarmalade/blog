@@ -7,17 +7,11 @@
     <title><?php if($_B['navtitle']) { ?><?php echo $_B['navtitle'];?><?php } else { ?><?php echo $_B['setting']['blog']['blogName'];?><?php } ?></title>
 	<meta name="keywords" content="">
 	<meta name="description" content="<?php echo $_B['setting']['blog']['blogName'];?>-->">
-    <link href="<?php echo CSSDIR;?>/bootstrap.css" rel="stylesheet">
-	<link href="<?php echo CSSDIR;?>/common.css" rel="stylesheet">
+	
     <!--[if lt IE 9]>
       <script src="http://libs.useso.com/js/html5shiv/3.7/html5shiv.min.js"></script>
       <script src="http://libs.useso.com/js/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-	<script src="<?php echo JSDIR;?>/jquery.min.js"></script>
-    <script src="<?php echo JSDIR;?>/bootstrap.min.js"></script>
-	<script src="<?php echo JSDIR;?>/lazyload.js"></script>
-	<script src="<?php echo JSDIR;?>/common.js"></script>
-  </head>
+    <![endif]--><?php includeJSCSS();?>  </head>
   <body>
 
     <div class="container page-header">
@@ -76,7 +70,7 @@
 			  </ul>
 			</li>
 		  <?php } else { ?>
-		    <li><a href="#" data-toggle="modal" data-target="#login"><span class="glyphicon glyphicon-user"></span> 登录</a></li>
+		    <li><a href="javascript:;" class="getLoginView"><span class="glyphicon glyphicon-user"></span> 登录</a></li>
 			<li><a href="index.php?m=user&do=reg"><span class="glyphicon glyphicon-piggy-bank"></span> 注册</a></li>
 		  <?php } ?>
 		  </ul>

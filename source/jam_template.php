@@ -77,7 +77,7 @@ class template {
 	}
 
 	function _error($message, $tplname) {
-		jam_error::system_error($message, $tplname);
+		jam_error::system_error($message, '',$tplname);
 		exit();
 	}
 

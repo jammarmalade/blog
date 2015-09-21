@@ -1,6 +1,4 @@
-
-<script src="<?php echo JSDIR;?>/editor.js"></script>
-<div class="post-area" style="margin-bottom:50px;">
+<?php includeJSCSS('editor');?><div class="post-area" style="margin-bottom:50px;">
 	<div class="btn-group edit-bar" role="group">
 		<button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="加粗" onclick="editor('<?php echo $areaid;?>','b');"><span class="glyphicon glyphicon-bold"></span></button>
 		<button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="斜线" onclick="editor('<?php echo $areaid;?>','i');"><span class="glyphicon glyphicon-italic"></span></button>

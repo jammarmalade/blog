@@ -8,6 +8,16 @@
 		  </span>
 		</div><!-- /input-group -->
 	</div>
+	<!-- /clock -->
+	<div class="row sider-mp" style="margin-top:20px;"><?php includeJSCSS('clock');?><div id="clock" class="light">
+			<div class="display">
+				<div class="weekdays"></div>
+				<div class="ampm"></div>
+				<div class="digits"></div>
+				<div id="switch-theme" class="button-holder"></div>
+			</div>
+		</div>
+	</div>
 	<div class="row sider-mp" style="margin-top:20px;">
 		<div class="panel-group" id="side_article" role="tablist" aria-multiselectable="true">
 		  <div class="panel panel-default">

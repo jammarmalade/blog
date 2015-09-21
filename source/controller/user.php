@@ -13,7 +13,7 @@ if(!in_array($do,$doarr)){
 switch($do){
 	case 'reg':
 		if($_B['uid']){//若是已登录的
-			if(strpos($_B['referer'],'user') && strpos($_B['referer'],'reg')){
+			if(strpos($_B['referer'],'user') && strpos($_B['referer'],'reg') || strpos($_B['referer'],'login')){
 				bheader('location: '.$_B['siteurl']);
 			}
 			bheader('location: '.$_B['referer']);
@@ -86,10 +86,18 @@ switch($do){
 			}
 			jsonOutput($status,$data);
 		}
+		$do = 'reg';
 		break;
 	case 'login':
 		if($_B['uid']){//若是已登录的
-			jsonOutput(1);
+			if(!$_B['ajax']){
+				if(strpos($_B['referer'],'user') && strpos($_B['referer'],'reg') || strpos($_B['referer'],'login')){
+					bheader('location: '.$_B['siteurl']);
+				}
+				bheader('location: '.$_B['referer']);
+			}else{
+				jsonOutput(1);
+			}
 		}
 		if($_B['ajax'] && $_GET['loginbtn']){
 			$username=trim($_GET['username']);
@@ -129,8 +137,8 @@ switch($do){
 			}else{
 				jsonOutput(2,'用户名或密码错误');
 			}
-			
 		}
+		$do = 'login';
 		break;
 	case 'check':
 		$status=1;
@@ -165,5 +173,5 @@ switch($do){
 }
 
 
-include display('user_reg');
+include display('user_'.$do);
 ?>

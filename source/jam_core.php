@@ -2,19 +2,20 @@
 
 error_reporting(E_ALL);
 define('BLOG', true);
-define('BLOG_DEBUG', false);
+//æ˜¯å¦ å¼€å¯ debugï¼Œçº¿ä¸Šè¦ä¸º false
+define('BLOG_DEBUG', true);
 
-set_exception_handler(array('jam', 'jamException'));//Òì³£´¦Àí
+set_exception_handler(array('jam', 'jamException'));//å¼‚å¸¸å¤„ç†
 
 if(BLOG_DEBUG){
-	set_error_handler(array('jam', 'jamError'));//´íÎó´¦Àí (ÓĞÎÊÌâ)
-	register_shutdown_function(array('jam', 'jamShutdown'));//¶¨ÒåPHP³ÌĞòÖ´ĞĞÍê³ÉºóÖ´ĞĞµÄº¯Êı
+	set_error_handler(array('jam', 'jamError'));//é”™è¯¯å¤„ç† (æœ‰é—®é¢˜)
+	register_shutdown_function(array('jam', 'jamShutdown'));//å®šä¹‰PHPç¨‹åºæ‰§è¡Œå®Œæˆåæ‰§è¡Œçš„å‡½æ•°
 }
 
-if(function_exists('spl_autoload_register')) {//×Ô¶¯¼ÓÔØÀà
+if(function_exists('spl_autoload_register')) {//è‡ªåŠ¨åŠ è½½ç±»
 	spl_autoload_register(array('jam', 'autoload'));
 } else {
-	function __autoload($class) {//×Ô¶¯¼ÓÔØÀà£¨ÀÏ°æ±¾£©
+	function __autoload($class) {//è‡ªåŠ¨åŠ è½½ç±»ï¼ˆè€ç‰ˆæœ¬ï¼‰
 		return jam::autoload($class);
 	}
 }
@@ -23,25 +24,25 @@ class J extends jam {}
 J::creatapp();
 
 DB::init($_B['config']['db']);
-//³õÊ¼»¯ÓÃ»§
+//åˆå§‹åŒ–ç”¨æˆ·
 J::app()->init_web();
 class jam
 {
 	private static $_app;
 	private static $_imports;
-	private static $_tables;//Êı¾İ±íµÄÀàÃû(×Ô¶¯¼ÓÔØÀàÎÄ¼ş£¬ÀàÎÄ¼şÃûĞèÒªºÍÀàÃûÏàÍ¬)
+	private static $_tables;//æ•°æ®è¡¨çš„ç±»å(è‡ªåŠ¨åŠ è½½ç±»æ–‡ä»¶ï¼Œç±»æ–‡ä»¶åéœ€è¦å’Œç±»åç›¸åŒ)
 
 	public static function app() {
 		return self::$_app;
 	}
-	//ÊµÀı»¯ application
+	//å®ä¾‹åŒ– application
 	public static function creatapp() {
 		if(!is_object(self::$_app)) {
 			self::$_app = jam_application::instance();
 		}
 		return self::$_app;
 	}
-	//Êı¾İ±íÀà
+	//æ•°æ®è¡¨ç±»
 	public static function t($name) {
 		$classname = 't_'.$name;
 		if(!isset(self::$_tables[$classname])) {
@@ -49,23 +50,26 @@ class jam
 		}
 		return self::$_tables[$classname];
 	}
-	//×Ô¶¨ÒåÒì³£´¦Àí
+	//è‡ªå®šä¹‰å¼‚å¸¸å¤„ç†
 	public static function jamException($exc) {
 		jam_error::exception_error($exc);
 	}
-	//×Ô¶¨Òå´íÎó´¦Àí
+	//è‡ªå®šä¹‰é”™è¯¯å¤„ç†ï¼ˆæœ‰é—®é¢˜ï¼‰
 	public static function jamError($errno, $errstr, $errfile, $errline) {
-		echo 'jamError';
+	//	echo 'jamError';
 	}
-	//
+	//è‡ªå®šä¹‰ ç¨‹åºæ‰§è¡Œå®Œæˆæˆ–æ„å¤–æ­»æ‰å¯¼è‡´PHPæ‰§è¡Œå³å°†å…³é—­æ—¶ï¼Œå°†è¢«è°ƒç”¨çš„å‡½æ•°
 	public static function jamShutdown() {
-		echo 'jamShutdown';
+		//è‹¥æ˜¯è°ƒè¯•æ¨¡å¼ï¼Œç¨‹åºè¿è¡Œå®Œæˆåï¼Œæ‰“å°é”™è¯¯ä¿¡æ¯
+		if(($error = error_get_last()) && $error['type'] & BLOG_DEBUG) {
+			jam_error::system_error($error['message'], $error['type'],$error['file'].' - '.$error['line']);
+		}
 	}
 
 	public static function autoload($class) {
 		$class = strtolower($class);
 		if(strpos($class, 't_') !== false) {
-			$file = 'table/'.$class;//ÈôÊÇ±íÄ£ĞÍÀà
+			$file = 'table/'.$class;//è‹¥æ˜¯è¡¨æ¨¡å‹ç±»
 		}else{
 			$file =$class;
 		}
@@ -84,7 +88,7 @@ class jam
 		}
 
 	}
-	public static function import($name) {//ÒıÈëÀàÎÄ¼ş
+	public static function import($name) {//å¼•å…¥ç±»æ–‡ä»¶
 		if(!isset(self::$_imports[$name])) {
 			$path=BLOG_ROOT.'/source/'.$name.'.php';
 			$blog_path=BLOG_ROOT.'/source/blog_'.$name.'.php';

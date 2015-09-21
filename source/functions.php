@@ -569,4 +569,107 @@ function checkLogin($msg=''){
 	}
 	return true;
 }
+//引入js和css,压缩和未压缩
+//$page 对应页面/或标识
+function includeJSCSS($page='all'){
+	
+	$asset=array();
+	//-----------头部引入 all
+	//js
+	$asset['all']['js'][]=array(
+		'debug' => JSDIR.'/jquery.min.js',	//测试
+		'online' => JSDIR.'/jquery.min.js',	//线上
+	);
+	$asset['all']['js'][]=array(
+		'debug' => JSDIR.'/bootstrap.min.js',
+		'online' => JSDIR.'/bootstrap.min.js',
+	);
+	$asset['all']['js'][]=array(
+		'debug' => JSDIR.'/lazyload.js',
+		'online' => JSDIR.'/lazyload.min.js',
+	);
+	$asset['all']['js'][]=array(
+		'debug' => JSDIR.'/common.js',
+		'online' => JSDIR.'/common.min.js',
+	);
+	//css 
+	$asset['all']['css'][]=array(
+		'debug' => CSSDIR.'/bootstrap.css',
+		'online' => CSSDIR.'/bootstrap.min.css',
+	);
+	$asset['all']['css'][]=array(
+		'debug' => CSSDIR.'/common.css',
+		'online' => CSSDIR.'/common.min.css',
+	);
+
+	//------添加文章编辑器 articleNew
+	//js
+	$asset['articleNew']['js'][]=array(
+		'debug' => JSDIR.'/summernote.js',
+		'online' => JSDIR.'/summernote.min.js',
+	);
+	$asset['articleNew']['js'][]=array(
+		'debug' => JSDIR.'/summernote-zh-CN.js',
+		'online' => JSDIR.'/summernote-zh-CN.min.js',
+	);
+	$asset['articleNew']['js'][]=array(
+		'debug' => JSDIR.'/article-new.js',
+		'online' => JSDIR.'/article-new.min.js',
+	);
+	//css
+	$asset['articleNew']['css'][]=array(
+		'debug' => CSSDIR.'/font-awesome.min.css',
+		'online' => CSSDIR.'/font-awesome.min.css',
+	);
+	$asset['articleNew']['css'][]=array(
+		'debug' => CSSDIR.'/summernote.min.css',
+		'online' => CSSDIR.'/summernote.min.css',
+	);
+	//-------简单(ubb)编辑器 editor
+	$asset['editor']['js'][]=array(
+		'debug' => JSDIR.'/editor.js',
+		'online' => JSDIR.'/editor.min.js',
+	);
+	//--------右侧电子时钟
+	//js
+	$asset['clock']['js'][]=array(
+		'debug' => JSDIR.'/clock/moment.min.js',
+		'online' => JSDIR.'/clock/moment.min.js',
+	);
+	$asset['clock']['js'][]=array(
+		'debug' => JSDIR.'/clock/script.js',
+		'online' => JSDIR.'/clock/script.min.js',
+	);
+	$asset['clock']['js'][]=array(
+		'debug' => JSDIR.'/clock/html5.js',
+		'online' => JSDIR.'/clock/html5.min.js',
+	);
+	//css
+	$asset['clock']['css'][]=array(
+		'debug' => CSSDIR.'/clock.css',
+		'online' => CSSDIR.'/clock.min.css',
+	);
+
+	$tmp = $asset[$page];
+	$csses = $tmp['css'];
+	$jses = $tmp['js'];
+	$html= '';
+	foreach($csses as $cssLinks){
+		if(BLOG_DEBUG){
+			$_tmpLink = $cssLinks['debug'];
+		}else{
+			$_tmpLink = $cssLinks['online'];
+		}
+		echo '<link rel="stylesheet" type="text/css" href="' . $_tmpLink . '" />' . PHP_EOL;
+	}
+	foreach($jses as $jsLinks){
+		if(BLOG_DEBUG){
+			$_tmpLink = $jsLinks['debug'];
+		}else{
+			$_tmpLink = $jsLinks['online'];
+		}
+		echo '<script src="'.$_tmpLink.'" type="text/javascript"></script>' . PHP_EOL;
+	}
+}
+
 ?>

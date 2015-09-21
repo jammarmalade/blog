@@ -137,6 +137,8 @@ $(function(){
 		
 	}
 	//登录
+	//获取登录框视图模版
+
 	$('#btn_login').unbind("click").click(function(){
 		var l_name=$.trim($('#li_username').val());
 		var l_pwd=$.trim($('#li_pwd').val());
