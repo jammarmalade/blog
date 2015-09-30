@@ -18,22 +18,22 @@ if($do=='list'){
 	$pagehtml=page($count,$_B['page'],$limit,'admin.php?action=tag&do=list');
 }elseif($do=='add'){
 	if($_B['ajax']){
-		$return['status']=1;
-		$return['data']='';
+		$status=1;
+		$data='';
 		$tagname=$_GET['tagname'];
 		if(J::t('tag')->find_by_tagname($tagname)){
-			$return['status']=2;
-			$return['data']='已存在该标签';
+			$status=2;
+			$data='已存在该标签';
 		}else{
 			$tagid=J::t('tag')->insert(array('tagname'=>$tagname,'dateline'=>TIMESTAMP));
 			if($tagid>0){
-				$return['data']=$tagid;
+				$data=$tagid;
 			}else{
-				$return['status']=2;
-				$return['data']='插入失败';
+				$status=2;
+				$data='插入失败';
 			}
 		}
-		jsonOutput($return);
+		jsonOutput($status,$data);
 	}
 	exit();
 }

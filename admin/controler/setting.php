@@ -30,69 +30,63 @@ if($do=='blog'){
 	if($_B['ajax']){
 		$type=$_GET['type'];
 		if($type=='update'){
-			$return['status']=1;
-			$return['data']='';
 			if(J::t('nav')->find_by_name($_GET['name'])){
-				$return['status']=2;
-				$return['data']='该导航名称已存在';
-				jsonOutput($return);
+				jsonOutput(2,'该导航名称已存在');
 			}
-			$status=$_GET['status']=='false' ? 0 : 1;
+			$navstatus=$_GET['status']=='false' ? 0 : 1;
 			$update=array(
 				'name'=>$_GET['name'],
 				'link'=>$_GET['link'],
 				'displayorder'=>$_GET['displayorder'],
-				'status'=>$status,
+				'status'=>$navstatus,
 			);
 			if(!(J::t('nav')->update_by_pk($update,$_GET['id']))){
-				$return['status']=2;
-				$return['data']='修改失败';
+				$status=2;
+				$data='修改失败';
+			}else{
+				$status=1;
+				$data='修改成功';
 			}
-			jsonOutput($return);
+			jsonOutput($status,$data);
 		}elseif($type=='add'){
-			$return['status']=1;
-			$return['data']='';
 			if(J::t('nav')->find_by_name($_GET['name'])){
-				$return['status']=2;
-				$return['data']='该导航名称已存在';
-				jsonOutput($return);
+				jsonOutput(2,'该导航名称已存在');
 			}
-			$status=$_GET['status']=='false' ? 0 : 1;
+			$navstatus=$_GET['status']=='false' ? 0 : 1;
 			$insert=array(
 				'pid' =>$_GET['pid'],
 				'name'=>$_GET['name'],
 				'link'=>$_GET['link'],
 				'displayorder'=>$_GET['displayorder'],
 				'dateline'=>TIMESTAMP,
-				'status'=>$status,
+				'status'=>$navstatus,
 			);
 			$id=J::t('nav')->insert($insert);
 			if(!$id){
-				$return['status']=2;
-				$return['data']='插入失败';
+				$status=2;
+				$data='插入失败';
 			}else{
-				$return['data']=$id;
+				$status=1;
+				$data=$id;
 			}
-			jsonOutput($return);
+			jsonOutput($status,$data);
 		}elseif($type=='del'){
-			$return['status']=1;
-			$return['data']='';
+			$status=1;
+			$data='';
 			if(!is_numeric($_GET['id']) || $_GET['id'] < 0){
-				$return['status']=2;
-				$return['data']='删除失败';
+				$status=2;
+				$data='删除失败';
 			}else{
 				if(J::t('nav')->deletenav($_GET['id'])){
-					$return['data']='删除成功';
+					$data='删除成功';
 				}else{
-					$return['status']=2;
-					$return['data']='删除失败';
+					$status=2;
+					$data='删除失败';
 				}
 			}
-			jsonOutput($return);
+			jsonOutput($status,$data);
 
 		}elseif($type=='cache'){
-			$return['status']=1;
-			$return['data']='';
 
 			$navinfos=J::t('nav')->fetch_all();
 			foreach($navinfos as $k=>$v){
@@ -109,7 +103,7 @@ if($do=='blog'){
 				$sortpinfos[$k]['downnav']=multi_array_sort($v,'displayorder');
 			}
 			J::t('setting')->replace('nav',$sortpinfos);
-			jsonOutput($return);
+			jsonOutput(1);
 		}
 		exit();
 	}else{

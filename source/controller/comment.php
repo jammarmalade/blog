@@ -96,6 +96,6 @@ if($do=='add'){
 	if(!is_numeric($_GET['cid']) || $_GET['cid']<=0){
 		jsonOutput(2,'数据出错，请刷新重试');
 	}
-
+	
 	jsonOutput(1,-1);
 }

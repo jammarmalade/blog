@@ -649,6 +649,21 @@ function includeJSCSS($page='all'){
 		'debug' => CSSDIR.'/clock.css',
 		'online' => CSSDIR.'/clock.min.css',
 	);
+	//--------代码高亮
+	//js
+	$asset['code']['js'][]=array(
+		'debug' => JSDIR.'/code/shbrush.js',
+		'online' => JSDIR.'/code/shbrush.js',
+	);
+	//css
+	$asset['code']['css'][]=array(
+		'debug' => CSSDIR.'/code/shcore.css',
+		'online' => CSSDIR.'/code/shcore.css',
+	);
+	$asset['code']['css'][]=array(
+		'debug' => CSSDIR.'/code/shthemedefault.css',
+		'online' => CSSDIR.'/code/shthemedefault.css',
+	);
 
 	$tmp = $asset[$page];
 	$csses = $tmp['css'];

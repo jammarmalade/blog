@@ -30,7 +30,8 @@
 	background-color: rgba(0, 0, 0, 0.6);
 }
 .mynav{
-	margin:10px 0;
+	width:1170px;
+	margin:10px auto;
 }
 .mywidth{
 	width:100%;

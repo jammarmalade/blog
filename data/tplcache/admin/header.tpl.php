@@ -15,6 +15,7 @@
     <script src="<?php echo JSDIR;?>/bootstrap.min.js"></script>
 	<script src="<?php echo JSDIR;?>/common.js"></script>
 	<script src="<?php echo JSDIR;?>/admin.js"></script>
+	<script src="<?php echo JSDIR;?>/lazyload.js"></script>
 	<style type="text/css">
 
 	</style>
