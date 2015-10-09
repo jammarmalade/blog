@@ -46,7 +46,7 @@ var funGetSelected = function(element) {
         textObj.focus();
     }
 };
-function editor(editarea,cmd){
+function editor(editarea,cmd,language){
 	var oTextarea = document.getElementById(editarea);
 	var start=end=fullcode=insertTxt='';
 	switch(cmd) {
@@ -64,9 +64,9 @@ function editor(editarea,cmd){
 			break;
 		case 'code':
 			cmd='code';
-			start='[code]';
+			start='[code='+language+']';
 			end='[/code]';
-			fullcode='[code][/code]';
+			fullcode='[code='+language+'][/code]';
 			break;
 		case 'quote':
 			cmd='quote';
@@ -98,7 +98,7 @@ function editor(editarea,cmd){
 		}
     } else {
 		if(cmd=='delformat'){
-			insertTxt=textSelection.replace(/\[\/*\w+\]/gi,'');
+			insertTxt=textSelection.replace(/\[\/*[a-z]+(=[a-z])*\]/gi,'');
 		}else{
 			insertTxt=start + textSelection + end;
 		}

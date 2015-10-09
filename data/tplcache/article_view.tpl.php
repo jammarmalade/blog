@@ -2,7 +2,7 @@
 		<div class="row" style="margin-top:20px;">
 		  <div class="col-xs-12 col-sm-6 col-md-8" style="padding:0px 30px;">
 		  <!-- article info -->
-				<div class="row">
+				<div class="row content-area">
 				  <h3 id="article_subject" data="<?php echo $article['aid'];?>"><?php echo $article['subject'];?></h3>
 				  <div class="list-tip">
 					<span title="<?php echo $article['time'];?>"><?php echo $article['formattime'];?></span>
@@ -33,8 +33,8 @@
 				</div>
 				
 				<!-- comments list-->
-				<div class="row" style="margin-top:50px;">
-					<h4 style="padding-bottom:10px;border-bottom:1px solid #cecece;">精彩评论</h4>
+				<div class="row" style="margin-top:50px;border-top:1px solid #428BCA;">
+					<h2 class="title">精彩评论</h2>
 					<div class="comments-list">
 					<?php if($comlist) { include display('_comment',''); } else { ?>
 						<div class="no-conmment">
@@ -47,9 +47,12 @@
 						<button type="button" class="btn btn-primary btn-block loadmore" data="index.php?m=comment&do=get&aid=<?php echo $article['aid'];?>&page=2"  style="margin-top:10px;">加载更多</button>
 					<?php } ?>
 				</div>
-
-				<div class="row" style="margin-top:10px;border-top:1px solid #cecece;">
-					<h4 style="padding-bottom:10px;border-bottom:1px dashed #cecece;">发表评论<span id="recomment" style="color:#c1c1c1;margin-left:10px;"></span></h4><?php $areaid="comment_edit";$editid="addcomment";?><?php include display('editor',''); ?></div>
+				<!-- code js -->
+			    <?php includeJSCSS('code');?>    <script type="text/javascript">
+				  SyntaxHighlighter.all();
+			    </script>
+				<div class="row" style="margin-top:10px;border-top:1px solid #428BCA;">
+					<h2 class="title">发表评论<span id="recomment" style="color:#c1c1c1;margin-left:10px;"></span></h2><?php $areaid="comment_edit";$editid="addcomment";?><?php include display('editor',''); ?></div>
 
 
 		 </div><?php include display('sidebar',''); ?></div><?php include display('footer',''); ?>

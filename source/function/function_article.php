@@ -66,7 +66,7 @@ function ubb2html($content,$attach=0,$type){
 	), array(
 		'<div>',
 		'</div>',
-		'<br>',
+		PHP_EOL,
 		'<pre>$1</pre>',
 		'<blockquote>$1</blockquote>',
 		'<h3>$1</h3>',
@@ -75,6 +75,8 @@ function ubb2html($content,$attach=0,$type){
 		'<hr>',
 		'<img src="$1" width="600px">',
 	), $content);
+	//转换代码文本
+	$content=preg_replace("/\[code=(\w+)\](.+?)\[\/code\]/ies","_code('\\1','\\2')",$content);
 
 	if($attach){
 		$resattachs=J::t('image')->fetch_all('id,path,thumbH',"aid=$attach AND type='article'");
@@ -110,5 +112,14 @@ function commentubb($content){
 		return '';
 	}
 	
-	return htmlspecialchars(strip_tags($content));
+	return strip_tags(htmlspecialchars($content));
+}
+
+function _code($code,$content){
+	$content=htmlspecialchars(htmlspecialchars_decode($content,ENT_QUOTES),ENT_QUOTES);
+	if(in_array($code,array('html','php','javascript','js'))){
+		return '<pre class="brush:'.$code.'; toolbar: false; auto-links: false;">'.$content.'</pre>';
+	}else{
+		return "<pre>$content</pre>";
+	}
 }

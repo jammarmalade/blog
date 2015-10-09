@@ -299,60 +299,35 @@ function getSetting($type,$name=''){
 }
 function btime($time,$ago='',$format=''){
 	if($ago){
-		$thisyear = date('Y');
-		$dateyear = date('Y',$time);
-		if (($thisyear - $dateyear) > 0) {
-			return date('Y-m-d H:i',$time);
+		$dur = TIMESTAMP - $time;  
+		if ($dur < 0) {  
+			return date('Y-m-d H:i:s',$time); 
+		} else {
+			if ($dur < 60) {  
+				return $dur . ' 秒前';  
+			} else {
+				if ($dur < 3600) {  
+					return floor($dur / 60) . ' 分钟前';  
+				} else {
+					if ($dur < 86400) {  
+						return floor($dur / 3600) . ' 小时前';  
+					} else {
+						if ($dur < 604800) {
+							$day = floor($dur / 86400);
+							if($day==1){
+								return '昨天 '.date('H:i',$time);
+							}elseif($day==2){
+								return '前天 '.date('H:i',$time);
+							}else{
+								return $day . ' 天前';  
+							}
+						} else {
+							return date('n-j H:i',$time);
+						}
+					}
+				}
+			}
 		}
-		$thismo=date('m');
-		$datemo=date('m',$time);
-		if ($thisyear==$dateyear && $thismo!=$datemo) {
-			return date('m-d H:i',$time);
-		}
-		$timer = $date;
-		$diff = TIMESTAMP - $timer;
-		$thisto=date('d');
-		$dateto=date('d',$time);
-		$day = $thisto - $dateto;
-        
-        $free = $diff % 86400;
-        if ($day > 0) {
-            if ($day > 7) {
-                return date('n-j H:i',$time);
-            } elseif ($day == 1) {
-                return "昨天 " . date('H:i',$time);
-            } elseif ($day == 2) {
-                return "前天 " . date('H:i',$time);
-            } else {
-                return $day . "天前";
-            }
-        } else {
-            if ($free > 0) {
-                $hour = floor($free / 3600);
-                $free = $free % 3600;
-                if ($hour > 0) {
-                    return $hour . "小时前";
-                } else {
-                    if ($free > 0) {
-                        $min = floor($free / 60);
-                        $free = $free % 60;
-                        if ($min > 0) {
-                            return $min . "分钟前";
-                        } else {
-                            if ($free > 0) {
-                                return $free . "秒前";
-                            } else {
-                                return '刚刚';
-                            }
-                        }
-                    } else {
-                        return '刚刚';
-                    }
-                }
-            } else {
-                return '刚刚';
-            }
-        }
 	}else{
 		return date($format ? $format :('Y-m-d H:i:s'),$time);
 	}

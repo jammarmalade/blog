@@ -183,7 +183,7 @@ $(function(){
 	$('#addcomment').unbind("click").click(function(){
 		var aid=$('#article_subject').attr('data');
 		var content=$('#comment_edit').val();
-		content=strip_tags(content);
+	//	content=strip_tags(content);//涉及到代码的显示，先注释
 		content=content.replace(/&nbsp;/g, '');
 		if(content==''){
 			alert('评论内容不能为空');
@@ -294,7 +294,13 @@ $(function(){
 			}
 		});
 	}
-	
+	//评论区焦点样式
+	$(".media").mouseover(function(){
+		$(this).addClass('box-shadow');
+	});
+	$(".media").mouseleave(function(){
+		$(this).removeClass('box-shadow');
+	});
 })
 function reply_comment(dom){
 	var cid=dom.attr('data');
