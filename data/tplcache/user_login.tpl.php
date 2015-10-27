@@ -1,5 +1,5 @@
 <?php if(!$_B['ajax']) { include display('header',''); } ?>
-	<div class="" id="login" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="true">
+	<div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="true">
 	  <div class="modal-dialog">
 		<div class="modal-content">
 		  <div class="modal-header">

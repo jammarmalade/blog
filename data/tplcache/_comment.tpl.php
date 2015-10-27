@@ -1,4 +1,4 @@
-<?php if(is_array($comlist)) foreach($comlist as $k => $com) { ?><div class="media comment-list" style="border:1px solid #fff;background-color:#fff;padding:5px;border-radius:5px;">
+<?php if(is_array($comlist)) foreach($comlist as $k => $com) { ?><div class="media comment-item">
   <a class="media-left" href="#">
 	<img src="<?php echo $com['avatar'];?>" alt="<?php echo $com['author'];?>" class="img-thumbnail">
   </a>

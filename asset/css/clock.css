@@ -33,7 +33,7 @@
 
 
 #clock.light{
-	background-color:#f3f3f3;
+	background-color:#fff;
 	color:#272e38;
 }
 
@@ -309,6 +309,7 @@
 	width:80px;
 	margin:15px auto;
 	border-radius:10px;
+	cursor:pointer;
 }
 
 /*

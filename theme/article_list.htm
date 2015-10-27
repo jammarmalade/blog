@@ -5,7 +5,7 @@
 		  <!-- article list -->
 		 <!--{foreach $articles $k $v}-->
 			<div class="row row-bottom">
-			  <a href="{$v['link']}" target="_blank" class="list-link"><h3>$v['subject']</h3></a>
+			  <a href="{$v['link']}" target="_blank" class="list-link">$v['subject']</a>
 			  <div class="list-content clearfix">
 			    <!--{if $imgids[$v['aid']]}-->
 				  <div class="list-img"><a href="{$v['link']}" target="_blank"><img src="{IMGDIR}l.gif" class="lazy" data-original="{$imgids[$v['aid']]}"></a></div>

@@ -19,7 +19,7 @@ switch($do){
 
 		$articles=J::t('article')->fetch_list('*','`status`=1',$start,$limit,'dateline DESC');
 		foreach($articles as $k=>$v){
-			$articles[$k]['content']=strip_ubb($v['content']);
+			$articles[$k]['content']=cutstr(strip_ubb($v['content']),300);
 			$articles[$k]['formattime']=btime($v['dateline'],1);
 			$articles[$k]['time']=btime($v['dateline']);
 			$articles[$k]['link']='index.php?m=article&do=view&aid='.$v['aid'];
@@ -127,7 +127,53 @@ switch($do){
 		break;
 	case 'update':
 		if($_B['ajax'] && $_GET['type']=='update'){
-			
+			$status=1;
+			$data='';
+			if(!$_B['uid']){
+				jsonOutput(2,'login');
+			}
+			$aid=$_GET['aid'];
+			if(!$aid){
+				jsonOutput(2,'没有文章需要修改');
+			}
+			$subject=$_GET['subject'];
+			$content=$_GET['content'];
+
+			if($subject=='' || $content==''){
+				jsonOutput(2,'标题或内容不能为空');
+			}
+			//以后添加审核内容关键词
+
+			$res_content=html2ubb($content,1);
+			$image=0;
+			if($res_content['image']){
+				$tmpimgs=$res_content['image'];
+				$image=array_shift($tmpimgs);
+			}
+			$update=array(
+				'subject'=>$subject,
+				'content'=>$res_content['content'],
+				'lastupdate'=>TIMESTAMP,
+				'image'=>$image,
+				'views'=>1,
+			);
+			$res_status=J::t('article')->update($update,"aid=$aid");
+			if($res_status && $image){
+				$str_ids=join(',',$res_content['image']);
+				J::t('image')->update(array(
+					'aid'=>$aid,
+					'status'=>1
+				),"uid=".$_B['uid']." AND id IN($str_ids)");
+				$data=$_B['siteurl'].'index.php?m=article&do=view&id='.$aid;
+			}else{
+				if(!$res_status){
+					$status=2;
+					$data='修改失败';
+				}else{
+					$data='修改成功';
+				}
+			}
+			jsonOutput($status,$data);
 		}
 		
 		$aid=$_GET['aid'] ? : 0;

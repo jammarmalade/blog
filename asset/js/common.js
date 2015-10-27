@@ -295,10 +295,19 @@ $(function(){
 		});
 	}
 	//评论区焦点样式
+/*
 	$(".media").mouseover(function(){
 		$(this).addClass('box-shadow');
 	});
 	$(".media").mouseleave(function(){
+		$(this).removeClass('box-shadow');
+	});
+	*/
+	
+	$(".row-bottom").mouseover(function(){
+		$(this).addClass('box-shadow');
+	});
+	$(".row-bottom").mouseleave(function(){
 		$(this).removeClass('box-shadow');
 	});
 })
@@ -381,3 +390,18 @@ $(function(){
 		effect : "fadeIn"
 	});
 })
+/*
+search		查找(数组)
+replace		替换(数组)
+str			在该字符串中查找
+regswitch	正则修饰符
+*/
+function preg_replace(search, replace, str, regswitch) {
+	var regswitch = !regswitch ? 'ig' : regswitch;
+	var len = search.length;
+	for(var i = 0; i < len; i++) {
+		re = new RegExp(search[i], regswitch);
+		str = str.replace(re, typeof replace == 'string' ? replace : (replace[i] ? replace[i] : replace[0]));
+	}
+	return str;
+}

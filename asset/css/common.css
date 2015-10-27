@@ -21,8 +21,11 @@ body{
     color: #333;
 }
 .row-bottom{
-	border-bottom:1px solid #cecece;
-	margin-bottom:10px;
+	border:1px solid #fff;
+	background-color:#fff;
+	padding:10px 10px;
+	border-radius:2px;
+	margin-bottom:18px;
 }
 .sider-mp{
 	padding:5px;
@@ -66,6 +69,7 @@ body{
 	background-color: #000;
 }
 .container-article-new{
+	background-color:#fff;
 	margin-top:10px;
 	margin-bottom:30px;
 }
@@ -73,14 +77,20 @@ body{
 	margin:15px 0;
 }
 .submit-div{
+	margin-top:10px;
+	margin-bottom:10px;
 	float:right;
+}
+.list-link{
+	font-size: 22px;
+	font-weight: 600;
+	text-decoration:none;
 }
 .list-link:hover{
 	color:#428bca;
 	text-decoration:none;
 }
 .list-content{
-	padding-left:10px;
     margin-bottom:10px;
 }
 .list-img{
@@ -125,4 +135,10 @@ body{
 }
 #article_subject{
 	font-weight:bold;
+}
+.comment-item{
+	border:1px solid #fff;
+	background-color:#fff;
+	padding:5px;
+	border-radius:5px;
 }

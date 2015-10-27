@@ -3,7 +3,7 @@
 		  <div class="col-xs-12 col-sm-6 col-md-8" style="padding:0px 30px;">
 		  <!-- article list -->
 		 <?php if(is_array($articles)) foreach($articles as $k => $v) { ?><div class="row row-bottom">
-			  <a href="<?php echo $v['link'];?>" target="_blank" class="list-link"><h3><?php echo $v['subject'];?></h3></a>
+			  <a href="<?php echo $v['link'];?>" target="_blank" class="list-link"><?php echo $v['subject'];?></a>
 			  <div class="list-content clearfix">
 			    <?php if($imgids[$v['aid']]) { ?>
 				  <div class="list-img"><a href="<?php echo $v['link'];?>" target="_blank"><img src="<?php echo IMGDIR;?>l.gif" class="lazy" data-original="<?php echo $imgids[$v['aid']];?>"></a></div>
