@@ -88,7 +88,10 @@
       history: {
         undo: '撤销',
         redo: '重做'
-      }
+      },
+	  myappend:{
+		kbd:'关键词',
+	  }
     }
   });
 })(jQuery);

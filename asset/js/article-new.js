@@ -13,6 +13,7 @@ $(function(){
 			['style', ['style']],
 			['style', ['bold', 'italic', 'underline', 'clear']],
 			['insert', ['picture', 'link', 'hr']],
+			['kbd', ['kbd']],
 		],
 		onImageUpload: function(files, editor, $editable) {
 			for(var i=0;i<files.length;i++){

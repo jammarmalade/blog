@@ -405,3 +405,12 @@ function preg_replace(search, replace, str, regswitch) {
 	}
 	return str;
 }
+//打印js 对象
+function printarr(obj){ 
+	var description = ""; 
+	for(var i in obj){   
+		var property=obj[i];   
+		description+=i+" = "+property+"\n";  
+	}   
+	alert(description); 
+} 

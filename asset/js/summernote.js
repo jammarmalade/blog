@@ -1932,7 +1932,7 @@
         var nativeRng = nativeRange();
         return agent.isW3CRangeSupport ? nativeRng.toString() : nativeRng.text;
       };
-  
+
       /**
        * create offsetPath bookmark
        *
@@ -2111,7 +2111,7 @@
         var ec = dom.fromOffsetPath(list.last(paras), bookmark.e.path);
 
         return new WrappedRange(sc, so, ec, eo);
-      }
+      },
     };
   })();
 
@@ -2444,7 +2444,10 @@
         history: {
           undo: 'Undo',
           redo: 'Redo'
-        }
+        },
+		myappend:{
+		  kbd:'Key words',
+		}
       }
     }
   };
@@ -3482,6 +3485,33 @@
       beforeCommand($editable);
       tagName = agent.isMSIE ? '<' + tagName + '>' : tagName;
       document.execCommand('FormatBlock', false, tagName);
+      afterCommand($editable);
+    };
+	//mycode 添加关键词
+	this.addMyCode = function ($editable, tagName) {
+      beforeCommand($editable);
+	  var rng = this.createRange($editable);
+	  //选中的文本
+	  var selectText = rng.toString();
+	  if(selectText==''){
+		alert('请选择文本');
+		return false;
+	  }
+	  var anchors;
+      var anchor = rng.insertNode($('<kbd>' + selectText + '</kbd>')[0]);
+      anchors = [anchor];
+	  var startRange = range.createFromNode(list.head(anchors)).collapse(true);
+      var startPoint = startRange.getStartPoint();
+      var endRange = range.createFromNode(list.last(anchors)).collapse();
+      var endPoint = endRange.getEndPoint();
+
+      range.create(
+        startPoint.node,
+        startPoint.offset,
+        endPoint.node,
+        endPoint.offset
+      ).select();
+
       afterCommand($editable);
     };
 
@@ -5236,6 +5266,15 @@
     };
 
     var tplButtonInfo = {
+	//mycode
+	  kbd:function(lang, options){
+		//fa-tags
+		return tplIconButton(options.iconPrefix + 'tags', {
+          event: 'addMyCode',
+          title: lang.myappend.kbd,
+		  value:'kbd'
+        });
+	  },
       picture: function (lang, options) {
         return tplIconButton(options.iconPrefix + 'picture-o', {
           event: 'showImageDialog',
