@@ -2,11 +2,11 @@
 
 function html2ubb($content,$image=0){
 	$content=preg_replace(array(
+		'/<pre>([\s\S]*?)<\/pre>/i',
+		'/<pre code="(\w+)">([\s\S]*?)<\/pre>/i',
 		'/<(p|div)[^>]*?>/i',
 		'/<\/(p|div)>/',
 		'/<br[^>]*?>/i',
-		'/<pre>(.+?)<\/pre>/i',
-		'/<pre code="(\w+)">(.+?)<\/pre>/i',
 		'/<blockquote>(.+?)<\/blockquote>/i',
 		'/<h3>(.+?)<\/h3>/i',
 		'/<a[^>]*?href="([^"]+?)"[^>]*?>(.+?)<\/a>/i',
@@ -16,11 +16,11 @@ function html2ubb($content,$image=0){
 		'/<(b|i|u|kbd)>(.+?)<\/\\1>/i',
 		'/<hr>/',
 	), array(
+		"[code=php]$1[/code]",
+		"[code=$1]$2[/code]",
 		"[div]",
 		"[/div]",
 		"\n",
-		"[code]$1[/code]",
-		"[code=$1]$2[/code]",
 		"[quote]$1[/quote]",
 		"[h3]$1[/h3]",
 		"[url=$1]$2[/url]",
@@ -31,7 +31,7 @@ function html2ubb($content,$image=0){
 		"[hr]",
 	), $content);
 	//转换代码文本
-	$content = preg_replace("/\[code=(\w+)\](.+?)\[\/code\]/ies","_code('\\1','\\2','ubb')",$content);
+	$content = preg_replace("/\[code=(\w+)\]([\s\S]*?)\[\/code\]/ies","_code('\\1','\\2','ubb')",$content);
 
 	if($image){//是否转换图片
 		$content=preg_replace('/<img[^>]*?data\-filename="(\d+)"[^>]*?>/i',"[attach]$1[/attach]",$content);//本站
@@ -48,7 +48,7 @@ function html2ubb($content,$image=0){
 function strip_ubb($content){
 	$tmp = preg_replace(array('/\[url=[^\]]+?\](.+?)\[\/url\]/i','/'.PHP_EOL.'/i','/\r|\n|\r\n/'),array("$1",'<br>','<br>'),$content);
 	//代码文本
-	$tmp = preg_replace("/\[code=(\w+)\](.+?)\[\/code\]/ies","htmlspecialchars(htmlspecialchars_decode('\\2',ENT_QUOTES),ENT_QUOTES)",$tmp);
+	$tmp = preg_replace("/\[code=(\w+)\]([\s\S]*?)\[\/code\]/ies","htmlspecialchars(htmlspecialchars_decode('\\2',ENT_QUOTES),ENT_QUOTES)",$tmp);
 	$tmp = preg_replace(array(
 		'/\[attach\]\d+\[\/attach\]/i',
 		'/\[hr\]/i',
@@ -65,8 +65,8 @@ function ubb2html($content,$attach=0,$type=''){
 			"/\[div\]/i",
 			"/\[\/div\]/i",
 			"/\n|\r|\r\n/",
-			"/\[code\](.+?)\[\/code\]/i",
-			"/\[quote\](.+?)\[\/quote\]/i",
+			"/\[code\]([\s\S]*?)\[\/code\]/i",
+			"/\[quote\]([\s\S]*?)\[\/quote\]/i",
 			"/\[h3\](.+?)\[\/h3\]/i",
 			"/\[url=([^\]]+?)\](.+?)\[\/url\]/i",
 			"/\[(b|i|u|kbd)\](.+?)\[\/\\1\]/i",
@@ -85,7 +85,7 @@ function ubb2html($content,$attach=0,$type=''){
 			'<img src="$1" width="600px">',
 		), $content);
 		//转换代码文本
-		$content = preg_replace("/\[code=(\w+)\](.+?)\[\/code\]/ies","_code('\\1','\\2')",$content);
+		$content = preg_replace("/\[code=(\w+)\]([\s\S]*?)\[\/code\]/ies","_code('\\1','\\2')",$content);
 	}
 	
 	if($attach){
@@ -129,7 +129,7 @@ function commentubb($content){
 }
 
 function _code($code,$content,$type='html'){
-	$content = str_replace(array("\\'",'\\"'),array('&#039;','&quot;'),$content);
+	$content = str_replace(array("&nbsp;","\\'",'\\"'),array(' ','&#039;','&quot;'),$content);
 	$content=htmlspecialchars(htmlspecialchars_decode($content,ENT_QUOTES),ENT_QUOTES);
 	if($type=='html'){
 		if(in_array($code,array('html','php','javascript','js'))){

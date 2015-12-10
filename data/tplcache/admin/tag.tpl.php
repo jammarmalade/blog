@@ -27,13 +27,15 @@
 						<tr>
 							<th>标签id</th>
 							<th>标签名称</th>
+							<th>创建人</th>
 							<th>创建时间</th>
 						</tr>
 					</thead>
 					<tbody id="taglist"><?php if(is_array($taginfo)) foreach($taginfo as $k => $v) { ?><tr>
 							<td><?php echo $v['tagid'];?></td>
 							<td	><?php echo $v['tagname'];?></td>
-							<td><?php btime($v['dateline']);?></td>
+							<td	><?php echo $v['username'];?></td>
+							<td><?php echo btime($v['dateline']);; ?></td>
 						</tr>
 					<?php } ?>
 					</tbody>

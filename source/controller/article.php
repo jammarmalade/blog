@@ -143,7 +143,6 @@ switch($do){
 				jsonOutput(2,'标题或内容不能为空');
 			}
 			//以后添加审核内容关键词
-
 			$res_content=html2ubb($content,1);
 			$image=0;
 			if($res_content['image']){

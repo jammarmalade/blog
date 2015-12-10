@@ -27,6 +27,7 @@
 						<tr>
 							<th>标签id</th>
 							<th>标签名称</th>
+							<th>创建人</th>
 							<th>创建时间</th>
 						</tr>
 					</thead>
@@ -35,7 +36,8 @@
 						<tr>
 							<td>$v['tagid']</td>
 							<td	>$v['tagname']</td>
-							<td><!--{eval btime($v['dateline']);}--></td>
+							<td	>$v['username']</td>
+							<td><!--{echo btime($v['dateline']);}--></td>
 						</tr>
 					<!--{/foreach}-->
 					</tbody>

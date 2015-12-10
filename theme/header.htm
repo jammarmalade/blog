@@ -32,11 +32,11 @@
 				<!--{if $v['status']!=0}-->
 					<!--{if isset($v['downnav']) && count($v['downnav'])}-->
 						<li class="dropdown">
-							<a href="{$v['link']}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">$v['name']<span class="caret"></span></a>
+							<a href="{$v['link']}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><b>$v['name']</b><span class="caret"></span></a>
 							<ul class="dropdown-menu" role="menu">
 								<!--{foreach $v['downnav'] $ck $cv}-->
 									<!--{if $v['status']!=0}-->
-										<li><a href="{$cv['link']}">$cv['name']</a></li>
+										<li><a href="{$cv['link']}"><b>$cv['name']</b></a></li>
 									<!--{/if}-->
 								<!--{/foreach}-->
 							</ul>

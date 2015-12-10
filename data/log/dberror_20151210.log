@@ -1,0 +1,10 @@
+20151210-16:55:38 [-] 1 [-] 127.0.0.1 [-] 0 [-] SQL string format error! This SQL need "3" vars to replace into.
+20151210-16:56:52 [-] 1 [-] 127.0.0.1 [-] 0 [-] SQL string format error! This SQL need "3" vars to replace into.
+20151210-16:58:13 [-] 1 [-] 127.0.0.1 [-] 0 [-] SQL string format error! This SQL need "3" vars to replace into.
+20151210-16:59:50 [-] 1 [-] 127.0.0.1 [-] 1064 [-] You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'LIKE '%x%' ORDER BY CHAR_LENGTH(tagname) LIMIT 10' at line 1
+20151210-17:00:32 [-] 1 [-] 127.0.0.1 [-] 1064 [-] You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'LIKE '%x%' ORDER BY CHAR_LENGTH(tagname) LIMIT 10' at line 1
+20151210-17:01:49 [-] 1 [-] 127.0.0.1 [-] 1064 [-] You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'LIKE '%x%' ORDER BY CHAR_LENGTH(tagname) LIMIT 10' at line 1
+20151210-17:02:56 [-] 1 [-] 127.0.0.1 [-] 1064 [-] You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'LIKE '%x%' ORDER BY CHAR_LENGTH(tagname) LIMIT 10' at line 1
+20151210-17:03:37 [-] 1 [-] 127.0.0.1 [-] 1146 [-] Table 'blog.tag' doesn't exist
+20151210-17:04:14 [-] 1 [-] 127.0.0.1 [-] 1054 [-] Unknown column 'id' in 'field list'
+20151210-18:05:37 [-] 1 [-] 127.0.0.1 [-] 1064 [-] You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'c'c'c%' ORDER BY CHAR_LENGTH(tagname) LIMIT 10' at line 1

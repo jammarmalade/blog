@@ -81,7 +81,6 @@ $(function(){
 	})
 	function callback_article_new(res){
 		ajaxSending=false;
-		res=eval("("+res+")");
 		if(res['status']==-1){
 			alert('请求失败');
 			return false;
@@ -99,7 +98,7 @@ $(function(){
 		var str = '';
 		str = content.replace(/\[div\]/ig, '<div>');
 		str = str.replace(/\[\/div\]/ig, '</div>');
-		str = str.replace(/\[code\](.+?)\[\/code\]/ig, "<pre>$1</pre>");
+		str = str.replace(/\[code([^\]]*?)\]([\s\S]*?)\[\/code\]/ig, "<pre>$2</pre>");
 		str = str.replace(/\[quote\](.+?)\[\/quote\]/ig, "<blockquote>$1</blockquote>");
 		str = str.replace(/\[h3\](.+?)\[\/h3\]/ig, "<h3>$1</h3>");
 		str = str.replace(/\[url=([^\]]+?)\](.+?)\[\/url\]/ig, "<a href=\"$1\" target=\"_blank\">$2</a>");

@@ -550,10 +550,15 @@ function includeJSCSS($page='all'){
 	
 	$asset=array();
 	//-----------头部引入 all
-	//js
+	//js jquery2.1
 	$asset['all']['js'][]=array(
 		'debug' => JSDIR.'/jquery.min.js',	//测试
 		'online' => JSDIR.'/jquery.min.js',	//线上
+	);
+	//jq 1.9 之后废弃了一些api,导致一些老的插件不能用,此文件就是解决这个问题的
+	$asset['all']['js'][]=array(
+		'debug' => JSDIR.'/jquery-migrate-1.2.1.min.js',
+		'online' => JSDIR.'/jquery-migrate-1.2.1.min.js',
 	);
 	$asset['all']['js'][]=array(
 		'debug' => JSDIR.'/bootstrap.min.js',
@@ -562,6 +567,10 @@ function includeJSCSS($page='all'){
 	$asset['all']['js'][]=array(
 		'debug' => JSDIR.'/lazyload.js',
 		'online' => JSDIR.'/lazyload.min.js',
+	);
+	$asset['all']['js'][]=array(
+		'debug' => JSDIR.'/autocomplete.js',
+		'online' => JSDIR.'/autocomplete.min.js',
 	);
 	$asset['all']['js'][]=array(
 		'debug' => JSDIR.'/common.js',

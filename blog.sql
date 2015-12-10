@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50617
 File Encoding         : 65001
 
-Date: 2015-10-27 17:37:50
+Date: 2015-12-10 18:35:30
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -35,12 +35,12 @@ CREATE TABLE `pre_article` (
   `status` tinyint(1) unsigned NOT NULL DEFAULT '1',
   `from` tinyint(1) unsigned NOT NULL DEFAULT '1',
   PRIMARY KEY (`aid`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of pre_article
 -- ----------------------------
-INSERT INTO `pre_article` VALUES ('2', '0', '恻恻恻恻恻恻', '[div]\n[attach]25[/attach][/div][div]\n[/div]啊死擦死擦死擦死擦洒洒[div]\n[/div][quote]擦撒擦拭[/quote][h3]擦撒擦拭[/h3][div][b]撒擦拭擦拭从[/b][i]萨斯擦拭擦拭擦[/i][u]拭擦拭擦拭擦[/u]拭擦拭擦[/div][div]\n[/div][div][url=https://www.baidu.com/]链接[/url]&nbsp; &nbsp; csaas&nbsp;[/div][hr][div]\n[/div][div][/div][div]cash曾经撒茶水间[/div][div]\n[/div][div]\n[/div][div]啊擦死[/div]\n[code=php]if($attach){\n		$resattachs=J::t(&#039;image&#039;)-&gt;fetch_all(&#039;id,path,thumbH&#039;,&quot;aid=$attach AND type=&#039;article&#039;&quot;);\n		if($resattachs){\n			$find=$replace=array();\n			foreach($resattachs as $k=&gt;$v){\n				$find[]=&quot;/[attach]&quot;.$v[&#039;id&#039;].&quot;[/attach]/i&quot;;\n				$width=$suff=&#039;&#039;;\n				if($v[&#039;thumbH&#039;]){\n					$width=&#039;width=&quot;600px&quot;&#039;;\n					$suff=&#039;.thumb.jpg&#039;;\n				}\n				$imgurl=$_B[&#039;siteurl&#039;].$v[&#039;path&#039;].$suff;\n				if($type==&#039;update&#039;){\n					$replace[]=&#039;&lt;img src=&quot;&#039;.$imgurl.&#039;&quot; &#039;.$width.&#039;&gt;&#039;;\n				}else{\n					$replace[]=&#039;&lt;img src=&quot;&#039;.IMGDIR.&#039;l.gif&quot; class=&quot;lazy&quot; data-original=&quot;&#039;.$imgurl.&#039;&quot; &#039;.$width.&#039;&gt;&#039;;\n				}\n			}\n			$content = preg_replace($find,$replace,$content);\n		}\n	}[/code]', '1', 'admin', '0', '1', '0', '25', '1445840107', '1445843382', '1', '1');
+INSERT INTO `pre_article` VALUES ('2', '0', '恻恻恻恻恻恻', '[div]\n[attach]25[/attach][/div][div]\n[/div]啊死擦死擦死擦死擦洒洒[div]\n[/div][quote]擦撒擦拭[/quote][h3]擦撒擦拭[/h3][div][b]撒擦拭擦拭从[/b][i]萨斯擦拭擦拭擦[/i][u]拭擦拭擦拭擦[/u]拭擦拭擦[/div][div]\n[/div][div][url=https://www.baidu.com/]链接[/url]&nbsp; &nbsp; csaas&nbsp;[/div][hr][div]\n[/div][div][/div][div]cash曾经撒茶水间[/div][div]\n[/div][div]\n[/div][div]啊擦死[/div]\n[code=php]if($attach){\n		$resattachs=J::t(&#039;image&#039;)-&gt;fetch_all(&#039;id,path,thumbH&#039;,&quot;aid=$attach AND type=&#039;article&#039;&quot;);\n		if($resattachs){\n			$find=$replace=array();\n			foreach($resattachs as $k=&gt;$v){\n				$find[]=&quot;/[attach]&quot;.$v[&#039;id&#039;].&quot;[/attach]/i&quot;;\n				$width=$suff=&#039;&#039;;\n				if($v[&#039;thumbH&#039;]){\n					$width=&#039;width=&quot;600px&quot;&#039;;\n					$suff=&#039;.thumb.jpg&#039;;\n				}\n				$imgurl=$_B[&#039;siteurl&#039;].$v[&#039;path&#039;].$suff;\n				if($type==&#039;update&#039;){\n					$replace[]=&#039;&lt;img src=&quot;&#039;.$imgurl.&#039;&quot; &#039;.$width.&#039;&gt;&#039;;\n				}else{\n					$replace[]=&#039;&lt;img src=&quot;&#039;.IMGDIR.&#039;l.gif&quot; class=&quot;lazy&quot; data-original=&quot;&#039;.$imgurl.&#039;&quot; &#039;.$width.&#039;&gt;&#039;;\n				}\n			}\n			$content = preg_replace($find,$replace,$content);\n		}\n	}[/code]', '1', 'admin', '0', '1', '0', '25', '1445840107', '1446009942', '1', '1');
 INSERT INTO `pre_article` VALUES ('3', '0', 'cececcececeeeeee', '[div]\n[attach]25[/attach][/div][div]\n[/div]啊死擦死擦死擦死擦洒洒[div]\n[/div][quote]擦撒擦拭[/quote][h3]擦撒擦拭[/h3][div][b]撒擦拭擦拭从[/b][i]萨斯擦拭擦拭擦[/i][u]拭擦拭擦拭擦[/u]拭擦拭擦[/div][div]\n[/div][div][url=https://www.baidu.com/]链接[/url]&nbsp; &nbsp; csaas&nbsp;[/div][hr][div]\n[/div][div][/div][div]cash曾经撒茶水间[/div][div]\n[/div][div]\n[/div][div]啊擦死[/div]', '1', 'admin', '0', '0', '0', '0', '1436427142', '0', '1', '1');
 INSERT INTO `pre_article` VALUES ('6', '0', '测试测试', '[div]&lt;script&gt;alert(\'OK\')&lt;/script&gt;[/div][div]啊哈哈哈哈啊[/div]', '1', 'admin', '0', '0', '0', '0', '1436511170', '0', '1', '1');
 INSERT INTO `pre_article` VALUES ('7', '0', '测试测试', '[div]&lt;script&gt;alert(\'OK\')&lt;/script&gt;[/div][div]啊哈哈哈哈啊[/div]', '1', 'admin', '0', '0', '0', '0', '1436511180', '0', '1', '1');
@@ -53,6 +53,8 @@ INSERT INTO `pre_article` VALUES ('13', '0', '擦拭擦拭', '[div]啊擦死擦�
 INSERT INTO `pre_article` VALUES ('14', '0', '恻恻恻恻恻恻', '[div][div]\n[img=data/attachment/article/201507/04/173352g13raaxtxl6syzlx.jpg.thumb.jpg][/div][div]\n[/div]啊死擦死擦死擦死擦洒洒[div]\n[/div][quote]擦撒擦拭[/quote][h3]擦撒擦拭[/h3][div]撒擦拭擦拭从萨斯擦拭擦拭擦拭擦拭擦拭擦拭擦拭擦[/div][div]\n[/div][div][url=https://www.baidu.com/]链接[/url]&nbsp; &nbsp; csaas&nbsp;[/div][hr][div]\n[/div][div][/div][div]cash曾经撒茶水间[/div][div]\n[/div][div]\n[/div][div]啊擦死[/div]\n[code=$2]if($attach){\n$resattachs=J::t(\'image\')-&gt;fetch_all(\'id,path,thumbH\',\"aid=$attach AND type=\'article\'\");\nif($resattachs){\n$find=$replace=array();\nforeach($resattachs as $k=&gt;$v){\n$find[]=\"/[attach]\".$v[\'id\'].\"[/attach]/i\";\n$width=$suff=\'\';\nif($v[\'thumbH\']){\n$width=\'width=\"600px\"\';\n$suff=\'.thumb.jpg\';\n}\n$imgurl=$_B[\'siteurl\'].$v[\'path\'].$suff;\nif($type==\'update\'){\n$replace[]=\'&lt;img src=\"\'.$imgurl.\'\" \'.$width.\'&gt;\';\n}else{\n$replace[]=\'&lt;img src=\"\'.IMGDIR.\'l.gif\" class=\"lazy\" data-original=\"\'.$imgurl.\'\" \'.$width.\'&gt;\';\n}\n}\n$content = preg_replace($find,$replace,$content);\n}\n}[/code][/div][div]\n[/div][div]测试结束[/div]', '1', 'admin', '0', '1', '0', '0', '1445837162', '0', '1', '1');
 INSERT INTO `pre_article` VALUES ('15', '0', '恻恻恻恻恻恻', '[div][div]\n[img=data/attachment/article/201507/04/173352g13raaxtxl6syzlx.jpg.thumb.jpg][/div][div]\n[/div]啊死擦死擦死擦死擦洒洒[div]\n[/div][quote]擦撒擦拭[/quote][h3]擦撒擦拭[/h3][div]撒擦拭擦拭从萨斯擦拭擦拭擦拭擦拭擦拭擦拭擦拭擦[/div][div]\n[/div][div][url=https://www.baidu.com/]链接[/url]&nbsp; &nbsp; csaas&nbsp;[/div][hr][div]\n[/div][div][/div][div]cash曾经撒茶水间[/div][div]\n[/div][div]\n[/div][div]啊擦死[/div]\n[code=$2]if($attach){\n$resattachs=J::t(\'image\')-&gt;fetch_all(\'id,path,thumbH\',\"aid=$attach AND type=\'article\'\");\nif($resattachs){\n$find=$replace=array();\nforeach($resattachs as $k=&gt;$v){\n$find[]=\"/[attach]\".$v[\'id\'].\"[/attach]/i\";\n$width=$suff=\'\';\nif($v[\'thumbH\']){\n$width=\'width=\"600px\"\';\n$suff=\'.thumb.jpg\';\n}\n$imgurl=$_B[\'siteurl\'].$v[\'path\'].$suff;\nif($type==\'update\'){\n$replace[]=\'&lt;img src=\"\'.$imgurl.\'\" \'.$width.\'&gt;\';\n}else{\n$replace[]=\'&lt;img src=\"\'.IMGDIR.\'l.gif\" class=\"lazy\" data-original=\"\'.$imgurl.\'\" \'.$width.\'&gt;\';\n}\n}\n$content = preg_replace($find,$replace,$content);\n}\n}[/code][/div][div]\n[/div][div]\n[/div][div]策划不是[/div][div]\n[/div]', '1', 'admin', '0', '1', '0', '0', '1445837257', '0', '1', '1');
 INSERT INTO `pre_article` VALUES ('16', '0', '恻恻恻恻恻恻', '[div][div]\n[img=data/attachment/article/201507/04/173352g13raaxtxl6syzlx.jpg.thumb.jpg][/div][div]\n[/div]啊死擦死擦死擦死擦洒洒[div]\n[/div][quote]擦撒擦拭[/quote][h3]擦撒擦拭[/h3][div]撒擦拭擦拭从萨斯擦拭擦拭擦拭擦拭擦拭擦拭擦拭擦[/div][div]\n[/div][div][url=https://www.baidu.com/]链接[/url]&nbsp; &nbsp; csaas&nbsp;[/div][hr][div]\n[/div][div][/div][div]cash曾经撒茶水间[/div][div]\n[/div][div]\n[/div][div]啊擦死[/div]\n[code=$2]if($attach){\n$resattachs=J::t(\'image\')-&gt;fetch_all(\'id,path,thumbH\',\"aid=$attach AND type=\'article\'\");\nif($resattachs){\n$find=$replace=array();\nforeach($resattachs as $k=&gt;$v){\n$find[]=\"/[attach]\".$v[\'id\'].\"[/attach]/i\";\n$width=$suff=\'\';\nif($v[\'thumbH\']){\n$width=\'width=\"600px\"\';\n$suff=\'.thumb.jpg\';\n}\n$imgurl=$_B[\'siteurl\'].$v[\'path\'].$suff;\nif($type==\'update\'){\n$replace[]=\'&lt;img src=\"\'.$imgurl.\'\" \'.$width.\'&gt;\';\n}else{\n$replace[]=\'&lt;img src=\"\'.IMGDIR.\'l.gif\" class=\"lazy\" data-original=\"\'.$imgurl.\'\" \'.$width.\'&gt;\';\n}\n}\n$content = preg_replace($find,$replace,$content);\n}\n}[/code][/div][div]\n[/div][div]\n[/div][div]策划不是[/div][div]\n[/div]', '1', 'admin', '0', '1', '0', '0', '1445837347', '0', '1', '1');
+INSERT INTO `pre_article` VALUES ('17', '0', '阿斯达撒打算发生', '[div]电风扇地方都是[kbd]粉色[/kbd]的方式[/div]', '1', 'admin', '0', '1', '0', '0', '1447132249', '0', '1', '1');
+INSERT INTO `pre_article` VALUES ('18', '0', '阿斯达撒打算发生', '[div]as刹那间才能卡死擦拭擦[/div][div]\n[/div][code=php]if(!$aid || !is_numeric($aid)){\n    shownotice(&#039;该文章不存在&#039;,array(&#039;referer&#039;=&gt;$_B[&#039;referer&#039;]));\n}\n[/code]', '1', 'admin', '0', '1', '0', '0', '1447132383', '1447138222', '1', '1');
 
 -- ----------------------------
 -- Table structure for `pre_comment`
@@ -72,7 +74,7 @@ CREATE TABLE `pre_comment` (
   `classify` char(10) CHARACTER SET utf8 NOT NULL DEFAULT 'article',
   `status` tinyint(1) unsigned NOT NULL DEFAULT '1',
   PRIMARY KEY (`cid`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of pre_comment
@@ -216,30 +218,63 @@ DROP TABLE IF EXISTS `pre_tag`;
 CREATE TABLE `pre_tag` (
   `tagid` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `tagname` varchar(100) NOT NULL,
+  `uid` mediumint(8) unsigned NOT NULL,
+  `username` char(15) NOT NULL DEFAULT '',
+  `articles` mediumint(8) unsigned NOT NULL DEFAULT '0' COMMENT '有此标签文章总数',
+  `status` tinyint(2) unsigned NOT NULL DEFAULT '1',
   `dateline` int(10) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`tagid`)
-) ENGINE=MyISAM AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=29 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of pre_tag
 -- ----------------------------
-INSERT INTO `pre_tag` VALUES ('2', 'PHP', '1422181828');
-INSERT INTO `pre_tag` VALUES ('3', 'MySql', '1422182268');
-INSERT INTO `pre_tag` VALUES ('4', 'Linux', '1422182285');
-INSERT INTO `pre_tag` VALUES ('5', 'Bootstrap', '1422182323');
-INSERT INTO `pre_tag` VALUES ('6', 'JQuery', '1422182343');
-INSERT INTO `pre_tag` VALUES ('7', 'Nginx', '1422182366');
-INSERT INTO `pre_tag` VALUES ('8', '留言区', '1422182413');
-INSERT INTO `pre_tag` VALUES ('9', 'js', '1422182725');
-INSERT INTO `pre_tag` VALUES ('10', '评论区', '1422182753');
-INSERT INTO `pre_tag` VALUES ('11', '交流区', '1422182759');
-INSERT INTO `pre_tag` VALUES ('12', '关于博客', '1422182769');
-INSERT INTO `pre_tag` VALUES ('13', '测试1', '1422188328');
-INSERT INTO `pre_tag` VALUES ('14', '测试2', '1422188331');
-INSERT INTO `pre_tag` VALUES ('15', '测试3', '1422188334');
-INSERT INTO `pre_tag` VALUES ('16', '测试4', '1422188338');
-INSERT INTO `pre_tag` VALUES ('17', '测试5', '1422189251');
-INSERT INTO `pre_tag` VALUES ('18', '测试6', '1422189306');
+INSERT INTO `pre_tag` VALUES ('2', 'PHP', '0', '', '0', '1', '1422181828');
+INSERT INTO `pre_tag` VALUES ('3', 'MySql', '0', '', '0', '1', '1422182268');
+INSERT INTO `pre_tag` VALUES ('4', 'Linux', '0', '', '0', '1', '1422182285');
+INSERT INTO `pre_tag` VALUES ('5', 'Bootstrap', '0', '', '0', '1', '1422182323');
+INSERT INTO `pre_tag` VALUES ('6', 'JQuery', '0', '', '0', '1', '1422182343');
+INSERT INTO `pre_tag` VALUES ('7', 'Nginx', '0', '', '0', '1', '1422182366');
+INSERT INTO `pre_tag` VALUES ('8', '留言区', '0', '', '0', '1', '1422182413');
+INSERT INTO `pre_tag` VALUES ('9', 'js', '0', '', '0', '1', '1422182725');
+INSERT INTO `pre_tag` VALUES ('10', '评论区', '0', '', '0', '1', '1422182753');
+INSERT INTO `pre_tag` VALUES ('11', '交流区', '0', '', '0', '1', '1422182759');
+INSERT INTO `pre_tag` VALUES ('12', '关于博客', '0', '', '0', '1', '1422182769');
+INSERT INTO `pre_tag` VALUES ('13', '测试1', '0', '', '0', '1', '1422188328');
+INSERT INTO `pre_tag` VALUES ('14', '测试2', '0', '', '0', '1', '1422188331');
+INSERT INTO `pre_tag` VALUES ('15', '测试3', '0', '', '0', '1', '1422188334');
+INSERT INTO `pre_tag` VALUES ('16', '测试4', '0', '', '0', '1', '1422188338');
+INSERT INTO `pre_tag` VALUES ('17', '测试5', '0', '', '0', '1', '1422189251');
+INSERT INTO `pre_tag` VALUES ('18', '测试6', '0', '', '0', '1', '1422189306');
+INSERT INTO `pre_tag` VALUES ('19', '测试7', '1', 'admin', '0', '1', '1447140130');
+INSERT INTO `pre_tag` VALUES ('20', '测试8', '1', 'admin', '0', '1', '1449742035');
+INSERT INTO `pre_tag` VALUES ('21', '测试9', '1', 'admin', '0', '1', '1449742204');
+INSERT INTO `pre_tag` VALUES ('22', '测试10', '1', 'admin', '0', '1', '1449742362');
+INSERT INTO `pre_tag` VALUES ('23', '测试11', '1', 'admin', '0', '1', '1449742491');
+INSERT INTO `pre_tag` VALUES ('24', '测试12', '1', 'admin', '0', '1', '1449742695');
+INSERT INTO `pre_tag` VALUES ('25', '测试13', '1', 'admin', '0', '1', '1449742728');
+INSERT INTO `pre_tag` VALUES ('26', '测试14', '1', 'admin', '0', '1', '1449742779');
+INSERT INTO `pre_tag` VALUES ('27', '测试15', '1', 'admin', '0', '1', '1449742798');
+INSERT INTO `pre_tag` VALUES ('28', '测试16', '1', 'admin', '0', '1', '1449742883');
+
+-- ----------------------------
+-- Table structure for `pre_tagid_aid`
+-- ----------------------------
+DROP TABLE IF EXISTS `pre_tagid_aid`;
+CREATE TABLE `pre_tagid_aid` (
+  `id` int(8) unsigned NOT NULL AUTO_INCREMENT,
+  `tagid` int(8) unsigned NOT NULL COMMENT '标签id',
+  `aid` int(8) unsigned NOT NULL COMMENT '文章id',
+  `uid` mediumint(8) unsigned NOT NULL,
+  `username` char(15) NOT NULL,
+  `dateline` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of pre_tagid_aid
+-- ----------------------------
+INSERT INTO `pre_tagid_aid` VALUES ('1', '13', '18', '1', 'admin', '1449743290');
 
 -- ----------------------------
 -- Table structure for `pre_users`

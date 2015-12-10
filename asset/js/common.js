@@ -31,7 +31,6 @@ $(function(){
 	})
 	function callback_reg(res){
 		ajaxSending=false;
-		res=eval("("+res+")");
 		if(res['status']==-1){
 			alert('请求失败');
 			return false;
@@ -107,11 +106,10 @@ $(function(){
 				callback_check(res);
 			});
 		}
-	})
+	});
 	//验证用户名或邮箱
 	function callback_check(res){
 		ajaxSending=false;
-		res=eval("("+res+")");
 		if(res['status']==-1){
 			alert('请求失败');
 			return false;
@@ -158,7 +156,6 @@ $(function(){
 	})
 	function callback_login(res){
 		ajaxSending=false;
-		res=eval("("+res+")");
 		if(res['status']==-1){
 			alert('请求失败');
 			return false;
@@ -199,7 +196,6 @@ $(function(){
 	})
 	function callback_addcomment(res){
 		ajaxSending=false;
-		res=eval("("+res+")");
 		if(res['status']==-1){
 			alert('请求失败');
 			return false;
@@ -231,7 +227,6 @@ $(function(){
 	function callback_getcomment(res){
 		var dom=$('.loadmore');
 		ajaxSending=false;
-		res=eval("("+res+")");
 		if(res['status']==-1){
 			alert('请求失败');
 			return false;
@@ -270,7 +265,6 @@ $(function(){
 		var url='index.php?m=comment&do=zan';
 		_ajax(url,data,function(res){
 			ajaxSending=false;
-			res=eval("("+res+")");
 			if(res['status']==-1){
 				alert('请求失败');
 				return false;
@@ -294,23 +288,142 @@ $(function(){
 			}
 		});
 	}
-	//评论区焦点样式
-/*
-	$(".media").mouseover(function(){
-		$(this).addClass('box-shadow');
-	});
-	$(".media").mouseleave(function(){
-		$(this).removeClass('box-shadow');
-	});
-	*/
-	
+
+	//文章列表页简单样式
 	$(".row-bottom").mouseover(function(){
 		$(this).addClass('box-shadow');
 	});
 	$(".row-bottom").mouseleave(function(){
 		$(this).removeClass('box-shadow');
 	});
+
+	//搜索标签
+	$("#tags_ipt_add").autocomplete('index.php?m=tag&do=search',{
+		matchContains:true,
+		delay:500,
+		cacheLength:100,
+		matchSubset:true,
+		minChars:1,
+		width:170,
+		max:20,
+		scrollHeight:500,
+		parse: parseData,
+		formatItem: formatItem
+	}).result(function(even,item){
+		addTag(item.id,item.tagname,'article');
+	});
+	//删除话题文章关系
+	$(".t-rem").unbind("click").click(function(){
+		removetag($(this));
+	})
+	
 })
+//添加标签
+function addTag(id,tagname,type){
+	$('#tags_ipt_add').val("");
+	if(id==-1 || id==-2){
+        return false;
+    }
+    var length=mb_strlen(tagname);
+    var sublen=Math.ceil(length/2);
+    if(sublen>25){
+        alert('话题长度只能是50个字符或25个汉字');
+        return false;
+    }
+	var spancount=$('#tags_item_add span').length;
+    if(spancount>=5){
+        alert('只能有5个标签');
+        return false;
+    }
+    var errortitle='';
+    $('#tags_item_add span').each(function() {
+        if(tagname==$(this).text()){
+            errortitle='该标签已存在';
+            return false;
+        }
+    });
+    $('#tags_item_add a').each(function() {
+        if(id==$(this).attr("data")){
+            errortitle='该标签已存在';
+            return false;
+        }
+    });
+    if(errortitle!=''){
+        alert(errortitle);
+        return false;
+    }
+    var success=true;
+    if(id==0){
+		_ajax('index.php?m=tag&do=add',{tagname:tagname},function(res){
+			if(res['status']==1){
+				id = res['data'];
+			}else{
+				alert(res['data']);
+				success = false;
+			}
+		},false);
+		ajaxSending=false;
+    }
+    if(!success){
+        return false;
+    }
+	//已存在该关系
+	if(!addRelation(id)){
+		return false;
+	}
+    
+	var html = '<div><span>'+tagname+'</span><a href="javascript:;" data="'+id+'" class="t-rem" name="removetag"></a></div>';
+	$('#tags_item_add').append(html);
+	
+	//将新添加的标签append到显示区域
+	var showHtml = '<a href="?m=tag&do=view&tid='+id+'">'+tagname+'</a>';
+	$('.tag-show-area').append(showHtml);
+	//重新绑定删除
+	$(".t-rem").unbind("click").click(function(){
+		removetag($(this));
+	})
+}
+function removetag(_this){
+	var id = _this.attr('data');
+	_this.parent('div').remove();
+	addRelation(id);
+}
+//添加/删除标签文章关系
+function addRelation(id){
+	var status=true;
+	var aid = $('#article_subject').attr('data');
+	_ajax('index.php?m=tag&do=addRelation',{'tagid':id,'aid':aid},function(res){
+		if(res['status']==1){
+			//添加关系成功
+		}else{
+			alert(res['data']);
+			status=false;
+		}
+		ajaxSending=false;
+	},false);
+	return status;
+}
+function parseData(data){
+	return $.map(eval(data), function(row) {
+		return {
+			data: row,
+			value: row.tagname,
+			result: row.id
+		}
+	});
+}
+function formatItem(row, i, max){
+	if(row.id==0){
+		return '<span>创建 '+row.tagname+' 话题</span>';
+	}
+	if(row.id==-1){
+		return '<span>'+row.tagname+'　正在审核</span>';
+	}
+	if(row.id==-2){
+		return '<span>请使用已存在的话题</span>';
+	}
+	return '<span>'+row.tagname+'</span>';
+}
 function reply_comment(dom){
 	var cid=dom.attr('data');
 	var author=dom.parents('.media-body').find('.com-author').text();
@@ -340,10 +453,13 @@ function _ajax(url,data,callback){
 		alert('有请求正在执行...');
 		return false;
 	}
+	var async = arguments[3]==false ? arguments[3] : true;
 	$.ajax({
 		type:'post',
 		url:url,
+		dataType:'json',
 		data:data,
+		async:async,
 		beforeSend:function(){
 			ajaxSending=true;
 		},
@@ -355,7 +471,6 @@ function _ajax(url,data,callback){
 }
 function _ajax_return(res){
 	ajaxSending=false;
-	res=eval("("+res+")");
 	if(res['status']==-1){
 		return 0;
 	}
@@ -413,4 +528,5 @@ function printarr(obj){
 		description+=i+" = "+property+"\n";  
 	}   
 	alert(description); 
-} 
+}
+

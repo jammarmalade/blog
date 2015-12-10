@@ -25,7 +25,13 @@ if($do=='list'){
 			$status=2;
 			$data='已存在该标签';
 		}else{
-			$tagid=J::t('tag')->insert(array('tagname'=>$tagname,'dateline'=>TIMESTAMP));
+			$insertData = array(
+				'tagname'=>$tagname,
+				'uid'=>$_B['uid'],
+				'username'=>$_B['username'],
+				'dateline'=>TIMESTAMP
+			);
+			$tagid=J::t('tag')->insert($insertData);
 			if($tagid>0){
 				$data=$tagid;
 			}else{

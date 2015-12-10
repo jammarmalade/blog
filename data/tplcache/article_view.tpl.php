@@ -3,6 +3,19 @@
 		  <div class="col-xs-12 col-sm-6 col-md-8" style="padding:0px 30px;">
 		  <!-- article info -->
 				<div class="row content-area">
+				  <div class="tag-show-area" style="display:none;">
+					<a href="?m=tag&do=view&tid=123">测试</a>
+					<a href="?m=tag&do=view&tid=12">测试2</a>
+				  </div>
+				  <div class="tag-edit-area clearfix">
+					<div id="tags_item_add">
+						<div><span>话题3</span><a href="javascript:;" data="88" class="t-rem" name="removetag"></a></div>
+					</div>
+					<div class="">
+						<div class="tags-search-area"><input type="text" id="tags_ipt_add" placeholder="搜索标签" autocomplete="off"></div>
+						<a class="a-btn" href="javascript:;">完成</a>
+					</div>
+				  </div>
 				  <h3 id="article_subject" data="<?php echo $article['aid'];?>"><?php echo $article['subject'];?></h3>
 				  <div class="list-tip">
 					<span title="<?php echo $article['time'];?>"><?php echo $article['formattime'];?></span>
@@ -33,7 +46,7 @@
 				</div>
 				
 				<!-- comments list-->
-				<div class="row" style="margin-top:50px;border-top:1px solid #428BCA;">
+				<div class="row" style="margin-top:50px;border-top:3px solid #428BCA;">
 					<h2 class="title">精彩评论</h2>
 					<div class="comments-list">
 					<?php if($comlist) { include display('_comment',''); } else { ?>
@@ -51,8 +64,8 @@
 			    <?php includeJSCSS('code');?>    <script type="text/javascript">
 				  SyntaxHighlighter.all();
 			    </script>
-				<div class="row" style="margin-top:10px;border-top:1px solid #428BCA;">
-					<h2 class="title">发表评论<span id="recomment" style="color:#c1c1c1;margin-left:10px;"></span></h2><?php $areaid="comment_edit";$editid="addcomment";?><?php include display('editor',''); ?></div>
+				<div class="row" style="margin-top:10px;border-top:3px solid #428BCA;">
+					<h2 class="title"><a name="comment" id="comment"></a>发表评论<span id="recomment" style="color:#c1c1c1;margin-left:10px;"></span></h2><?php $areaid="comment_edit";$editid="addcomment";?><?php include display('editor',''); ?></div>
 
 
 		 </div><?php include display('sidebar',''); ?></div><?php include display('footer',''); ?>

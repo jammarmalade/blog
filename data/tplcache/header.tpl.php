@@ -27,9 +27,9 @@
 		  <ul class="nav navbar-nav"><?php if(is_array(getSetting('nav'))) foreach(getSetting('nav') as $k => $v) { if($v['status']!=0) { ?>
 					<?php if(isset($v['downnav']) && count($v['downnav'])) { ?>
 						<li class="dropdown">
-							<a href="<?php echo $v['link'];?>" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><?php echo $v['name'];?><span class="caret"></span></a>
+							<a href="<?php echo $v['link'];?>" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><b><?php echo $v['name'];?></b><span class="caret"></span></a>
 							<ul class="dropdown-menu" role="menu"><?php if(is_array($v['downnav'])) foreach($v['downnav'] as $ck => $cv) { if($v['status']!=0) { ?>
-										<li><a href="<?php echo $cv['link'];?>"><?php echo $cv['name'];?></a></li>
+										<li><a href="<?php echo $cv['link'];?>"><b><?php echo $cv['name'];?></b></a></li>
 									<?php } ?>
 								<?php } ?>
 							</ul>
