@@ -316,6 +316,34 @@ $(function(){
 	$(".t-rem").unbind("click").click(function(){
 		removetag($(this));
 	})
+	//显示/隐藏tag 编辑区域
+	$('.tag-edit').click(function(){
+		showTagArea();
+	})
+	$('.a-btn').click(function(){
+		showTagArea();
+	})
+	//文章点赞
+	$('.like-btn').click(function(){
+		var id=$('#article_subject').attr('data');
+		_ajax('?m=article&do=zan',{'aid':id},function(res){
+			callback_like(res);
+		});
+	})
+	function callback_like(res){
+		ajaxSending=false;
+		if(res['status']==1){
+			var num = $('.article-like').text();
+			if(res['data']=='add'){
+				num = ++num;
+			}else{
+				num = --num;
+			}
+			if(num>0){
+				$('.article-like').text(num);
+			}
+		}
+	}
 	
 })
 //添加标签
@@ -376,8 +404,8 @@ function addTag(id,tagname,type){
 	$('#tags_item_add').append(html);
 	
 	//将新添加的标签append到显示区域
-	var showHtml = '<a href="?m=tag&do=view&tid='+id+'">'+tagname+'</a>';
-	$('.tag-show-area').append(showHtml);
+	var showHtml = '<a href="?m=tag&do=view&tid='+id+'" data="'+id+'">'+tagname+'</a>';
+	$('.tag-show-area span').append(showHtml);
 	//重新绑定删除
 	$(".t-rem").unbind("click").click(function(){
 		removetag($(this));
@@ -385,16 +413,28 @@ function addTag(id,tagname,type){
 }
 function removetag(_this){
 	var id = _this.attr('data');
+	var tagArea = $('.tag-show-area span a');
+	if(tagArea.length==1){
+		alert('至少保留一个标签');
+		return false;
+	}
 	_this.parent('div').remove();
-	addRelation(id);
+	tagArea.each(function() {
+		if($(this).attr('data')==id){
+			$(this).remove();
+			return false;
+		}
+	});
+	addRelation(id,'delRelation');
 }
 //添加/删除标签文章关系
-function addRelation(id){
+function addRelation(id,dotype){
 	var status=true;
 	var aid = $('#article_subject').attr('data');
-	_ajax('index.php?m=tag&do=addRelation',{'tagid':id,'aid':aid},function(res){
+	var dotype = dotype=='delRelation' ? 'delRelation' : 'addRelation';
+	_ajax('index.php?m=tag&do='+dotype,{'tagid':id,'aid':aid},function(res){
 		if(res['status']==1){
-			//添加关系成功
+			//添加/删除关系成功
 		}else{
 			alert(res['data']);
 			status=false;
@@ -402,6 +442,18 @@ function addRelation(id){
 		ajaxSending=false;
 	},false);
 	return status;
+}
+//显示/隐藏tag
+function showTagArea(){
+	var showarea=$('.tag-show-area');
+	var editarea=$('.tag-edit-area');
+	if(showarea.is(':visible')){
+		showarea.hide();
+		editarea.show();
+	}else{
+		showarea.show();
+		editarea.hide();
+	}
 }
 function parseData(data){
 	return $.map(eval(data), function(row) {

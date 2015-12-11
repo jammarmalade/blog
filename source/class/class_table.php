@@ -42,4 +42,9 @@ class class_table {
 //		echo $sql;
 		return DB::fetch_all("SELECT $field FROM %t $condition $strOrder $strLimit",array($this->_table));
 	}
+
+	function delete($condition){
+		$res = DB::delete($this->_table,$condition, $limit = 0, $unbuffered = false);
+		return $res;
+	}
 }

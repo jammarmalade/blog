@@ -1,0 +1,9 @@
+20151211-11:42:52 [-] 1 [-] 127.0.0.1 [-] 1064 [-] You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '=``-1 WHERE tagid=17' at line 1
+20151211-11:43:35 [-] 1 [-] 127.0.0.1 [-] 1146 [-] Table 'blog.tag' doesn't exist
+20151211-11:45:57 [-] 1 [-] 127.0.0.1 [-] 1064 [-] You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '=``-1 WHERE tagid=17' at line 1
+20151211-11:46:32 [-] 1 [-] 127.0.0.1 [-] 1064 [-] You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '=``-1 WHERE tagid=21' at line 1
+20151211-13:17:01 [-] 1 [-] 127.0.0.1 [-] 1064 [-] You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '`views+1 WHERE =18' at line 1
+20151211-13:17:54 [-] 1 [-] 127.0.0.1 [-] 1064 [-] You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '=18' at line 1
+20151211-18:59:42 [-] 1 [-] 127.0.0.1 [-] 1064 [-] You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'like=`like`-1 WHERE' at line 1
+20151211-19:01:04 [-] 1 [-] 127.0.0.1 [-] 1064 [-] You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'like=`like`-1 WHERE aid=18' at line 1
+20151211-19:03:22 [-] 1 [-] 127.0.0.1 [-] 1064 [-] You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'like=`like`-1 WHERE aid=18' at line 1

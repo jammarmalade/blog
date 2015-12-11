@@ -3,18 +3,24 @@
 		  <div class="col-xs-12 col-sm-6 col-md-8" style="padding:0px 30px;">
 		  <!-- article info -->
 				<div class="row content-area">
-				  <div class="tag-show-area" style="display:none;">
-					<a href="?m=tag&do=view&tid=123">测试</a>
-					<a href="?m=tag&do=view&tid=12">测试2</a>
-				  </div>
-				  <div class="tag-edit-area clearfix">
-					<div id="tags_item_add">
-						<div><span>话题3</span><a href="javascript:;" data="88" class="t-rem" name="removetag"></a></div>
-					</div>
-					<div class="">
-						<div class="tags-search-area"><input type="text" id="tags_ipt_add" placeholder="搜索标签" autocomplete="off"></div>
-						<a class="a-btn" href="javascript:;">完成</a>
-					</div>
+				  <div class="article-tag clearfix">
+					  <div class="tag-show-area">
+						<span><?php if(is_array($article['tags'])) foreach($article['tags'] as $k => $v) { ?><a href="?m=tag&do=view&tid=<?php echo $v['tagid'];?>" data="<?php echo $v['tagid'];?>"><?php echo $v['tagname'];?></a>
+							<?php } ?>
+						</span>
+						<?php if($_B['uid']==$article['authorid'] || $_B['admin']) { ?>
+							<a href="javascript:;" class="tag-edit">修改</a>
+						<?php } ?>
+					  </div>
+					  <div class="tag-edit-area clearfix">
+						<div id="tags_item_add"><?php if(is_array($article['tags'])) foreach($article['tags'] as $k => $v) { ?><div><span><?php echo $v['tagname'];?></span><a href="javascript:;" data="<?php echo $v['tagid'];?>" class="t-rem" name="removetag"></a></div>
+							<?php } ?>
+						</div>
+						<div class="">
+							<div class="tags-search-area"><input type="text" id="tags_ipt_add" placeholder="搜索标签" autocomplete="off"></div>
+							<a class="a-btn" href="javascript:;">完成</a>
+						</div>
+					  </div>
 				  </div>
 				  <h3 id="article_subject" data="<?php echo $article['aid'];?>"><?php echo $article['subject'];?></h3>
 				  <div class="list-tip">
@@ -23,27 +29,23 @@
 					<?php if($article['like']) { ?><span><?php echo $article['like'];?> 赞</span><?php } ?>
 					<?php if($article['comments']) { ?><span><?php echo $article['comments'];?> 条评论</span><?php } ?>
 					<span><?php echo $article['views'];?> 浏览</span>
-					<?php if($_B['uid']==$article['authorid'] || $_B['admin']) { ?><span><a href="index.php?m=article&do=update&aid=<?php echo $article['aid'];?>">修改</a></span><?php } ?>
+					<?php if($_B['uid']==$article['authorid'] || $_B['admin']) { ?>
+						<span><a href="index.php?m=article&do=update&aid=<?php echo $article['aid'];?>">修改</a></span>
+					<?php } ?>
 				  </div>
 				  <div class="content">
 					  <?php echo $article['content'];?>
 				  </div>
 				  <!-- like -->
 				  <div class="text-center extend" style="margin-top:50px;">
-					<button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-thumbs-up"></span> &nbsp;&nbsp;赞一个</button>
+					<button type="button" class="btn btn-primary like-btn"><span class="glyphicon glyphicon-thumbs-up"></span>
+					<?php if($article['like']) { ?>
+						<span class="article-like"><?php echo $article['like'];?></span>
+					<?php } ?>
+					</button>
 				  </div>
 				</div>
 		  <!-- / article info -->
-				<div class="clearfix hidden-xs" style="margin-top:50px;">
-					<span class="pull-left">上一篇</span><span class="pull-right">下一篇</span>
-				</div>
-				<!-- mobile -->
-				<div class="visible-xs-block" style="margin-top:50px;">
-					<button type="button" class="btn btn-primary btn-lg btn-block">上一篇</button>
-				</div>
-				<div class="visible-xs-block" style="margin-top:10px;">
-					<button type="button" class="btn btn-primary btn-lg btn-block">下一篇</button>
-				</div>
 				
 				<!-- comments list-->
 				<div class="row" style="margin-top:50px;border-top:3px solid #428BCA;">

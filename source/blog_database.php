@@ -148,7 +148,6 @@ class blog_database {
 			}
 		}
 		self::checkquery($sql);
-
 		$func = $unbuffered ? 'mysql_unbuffered_query' : 'mysql_query';
 
 		if(!($query = $func($sql, self::$curlink))) {

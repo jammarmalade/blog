@@ -29,6 +29,9 @@ class jam_error
 			$logmsg=date('Ymd-H:i:s').' [-] '.$_B['uid'].' [-] '.$_B['clientip'].' [-] '.$exception->getCode().' [-] '.$exception->getMessage().PHP_EOL;
 			@fwrite($fp, $logmsg);
 		}
+		if($_B['ajax'] && $exception->getSql()){
+			jsonOutput(2,$exception->getSql());
+		}
 		self::system_error($msg,'db',$extend);
 	}
 

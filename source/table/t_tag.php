@@ -46,6 +46,16 @@ class t_tag {
 		}
 		return $return;
 	}
+
+	//自增
+	function increase($field,$condition,$num = 1){
+		return DB::query("UPDATE pre_".$this->_table." SET $field=`$field`+$num WHERE $condition");
+	}
+	//自减
+	function decrease($field,$condition,$num = 1){
+		return DB::query("UPDATE pre_".$this->_table." SET $field=`$field`-$num WHERE $condition");
+	} 
+	
 }
 
 ?>

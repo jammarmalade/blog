@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50617
 File Encoding         : 65001
 
-Date: 2015-12-10 18:35:30
+Date: 2015-12-11 19:15:02
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -54,7 +54,25 @@ INSERT INTO `pre_article` VALUES ('14', '0', '恻恻恻恻恻恻', '[div][div]\n
 INSERT INTO `pre_article` VALUES ('15', '0', '恻恻恻恻恻恻', '[div][div]\n[img=data/attachment/article/201507/04/173352g13raaxtxl6syzlx.jpg.thumb.jpg][/div][div]\n[/div]啊死擦死擦死擦死擦洒洒[div]\n[/div][quote]擦撒擦拭[/quote][h3]擦撒擦拭[/h3][div]撒擦拭擦拭从萨斯擦拭擦拭擦拭擦拭擦拭擦拭擦拭擦[/div][div]\n[/div][div][url=https://www.baidu.com/]链接[/url]&nbsp; &nbsp; csaas&nbsp;[/div][hr][div]\n[/div][div][/div][div]cash曾经撒茶水间[/div][div]\n[/div][div]\n[/div][div]啊擦死[/div]\n[code=$2]if($attach){\n$resattachs=J::t(\'image\')-&gt;fetch_all(\'id,path,thumbH\',\"aid=$attach AND type=\'article\'\");\nif($resattachs){\n$find=$replace=array();\nforeach($resattachs as $k=&gt;$v){\n$find[]=\"/[attach]\".$v[\'id\'].\"[/attach]/i\";\n$width=$suff=\'\';\nif($v[\'thumbH\']){\n$width=\'width=\"600px\"\';\n$suff=\'.thumb.jpg\';\n}\n$imgurl=$_B[\'siteurl\'].$v[\'path\'].$suff;\nif($type==\'update\'){\n$replace[]=\'&lt;img src=\"\'.$imgurl.\'\" \'.$width.\'&gt;\';\n}else{\n$replace[]=\'&lt;img src=\"\'.IMGDIR.\'l.gif\" class=\"lazy\" data-original=\"\'.$imgurl.\'\" \'.$width.\'&gt;\';\n}\n}\n$content = preg_replace($find,$replace,$content);\n}\n}[/code][/div][div]\n[/div][div]\n[/div][div]策划不是[/div][div]\n[/div]', '1', 'admin', '0', '1', '0', '0', '1445837257', '0', '1', '1');
 INSERT INTO `pre_article` VALUES ('16', '0', '恻恻恻恻恻恻', '[div][div]\n[img=data/attachment/article/201507/04/173352g13raaxtxl6syzlx.jpg.thumb.jpg][/div][div]\n[/div]啊死擦死擦死擦死擦洒洒[div]\n[/div][quote]擦撒擦拭[/quote][h3]擦撒擦拭[/h3][div]撒擦拭擦拭从萨斯擦拭擦拭擦拭擦拭擦拭擦拭擦拭擦[/div][div]\n[/div][div][url=https://www.baidu.com/]链接[/url]&nbsp; &nbsp; csaas&nbsp;[/div][hr][div]\n[/div][div][/div][div]cash曾经撒茶水间[/div][div]\n[/div][div]\n[/div][div]啊擦死[/div]\n[code=$2]if($attach){\n$resattachs=J::t(\'image\')-&gt;fetch_all(\'id,path,thumbH\',\"aid=$attach AND type=\'article\'\");\nif($resattachs){\n$find=$replace=array();\nforeach($resattachs as $k=&gt;$v){\n$find[]=\"/[attach]\".$v[\'id\'].\"[/attach]/i\";\n$width=$suff=\'\';\nif($v[\'thumbH\']){\n$width=\'width=\"600px\"\';\n$suff=\'.thumb.jpg\';\n}\n$imgurl=$_B[\'siteurl\'].$v[\'path\'].$suff;\nif($type==\'update\'){\n$replace[]=\'&lt;img src=\"\'.$imgurl.\'\" \'.$width.\'&gt;\';\n}else{\n$replace[]=\'&lt;img src=\"\'.IMGDIR.\'l.gif\" class=\"lazy\" data-original=\"\'.$imgurl.\'\" \'.$width.\'&gt;\';\n}\n}\n$content = preg_replace($find,$replace,$content);\n}\n}[/code][/div][div]\n[/div][div]\n[/div][div]策划不是[/div][div]\n[/div]', '1', 'admin', '0', '1', '0', '0', '1445837347', '0', '1', '1');
 INSERT INTO `pre_article` VALUES ('17', '0', '阿斯达撒打算发生', '[div]电风扇地方都是[kbd]粉色[/kbd]的方式[/div]', '1', 'admin', '0', '1', '0', '0', '1447132249', '0', '1', '1');
-INSERT INTO `pre_article` VALUES ('18', '0', '阿斯达撒打算发生', '[div]as刹那间才能卡死擦拭擦[/div][div]\n[/div][code=php]if(!$aid || !is_numeric($aid)){\n    shownotice(&#039;该文章不存在&#039;,array(&#039;referer&#039;=&gt;$_B[&#039;referer&#039;]));\n}\n[/code]', '1', 'admin', '0', '1', '0', '0', '1447132383', '1447138222', '1', '1');
+INSERT INTO `pre_article` VALUES ('18', '0', '阿斯达撒打算发生', '[div]as刹那间才能卡死擦拭擦[/div][div]\n[/div][code=php]if(!$aid || !is_numeric($aid)){\n    shownotice(&#039;该文章不存在&#039;,array(&#039;referer&#039;=&gt;$_B[&#039;referer&#039;]));\n}\n[/code]', '1', 'admin', '16', '38', '0', '0', '1447132383', '1447138222', '1', '1');
+
+-- ----------------------------
+-- Table structure for `pre_article_like`
+-- ----------------------------
+DROP TABLE IF EXISTS `pre_article_like`;
+CREATE TABLE `pre_article_like` (
+  `id` int(8) unsigned NOT NULL AUTO_INCREMENT,
+  `uid` mediumint(8) unsigned NOT NULL,
+  `username` char(15) NOT NULL,
+  `aid` int(8) unsigned NOT NULL,
+  `dateline` int(10) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of pre_article_like
+-- ----------------------------
+INSERT INTO `pre_article_like` VALUES ('3', '1', 'admin', '18', '1449832437');
 
 -- ----------------------------
 -- Table structure for `pre_comment`
@@ -224,7 +242,7 @@ CREATE TABLE `pre_tag` (
   `status` tinyint(2) unsigned NOT NULL DEFAULT '1',
   `dateline` int(10) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`tagid`)
-) ENGINE=MyISAM AUTO_INCREMENT=29 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=30 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of pre_tag
@@ -248,7 +266,7 @@ INSERT INTO `pre_tag` VALUES ('17', '测试5', '0', '', '0', '1', '1422189251');
 INSERT INTO `pre_tag` VALUES ('18', '测试6', '0', '', '0', '1', '1422189306');
 INSERT INTO `pre_tag` VALUES ('19', '测试7', '1', 'admin', '0', '1', '1447140130');
 INSERT INTO `pre_tag` VALUES ('20', '测试8', '1', 'admin', '0', '1', '1449742035');
-INSERT INTO `pre_tag` VALUES ('21', '测试9', '1', 'admin', '0', '1', '1449742204');
+INSERT INTO `pre_tag` VALUES ('21', '测试9', '1', 'admin', '1', '1', '1449742204');
 INSERT INTO `pre_tag` VALUES ('22', '测试10', '1', 'admin', '0', '1', '1449742362');
 INSERT INTO `pre_tag` VALUES ('23', '测试11', '1', 'admin', '0', '1', '1449742491');
 INSERT INTO `pre_tag` VALUES ('24', '测试12', '1', 'admin', '0', '1', '1449742695');
@@ -256,6 +274,7 @@ INSERT INTO `pre_tag` VALUES ('25', '测试13', '1', 'admin', '0', '1', '1449742
 INSERT INTO `pre_tag` VALUES ('26', '测试14', '1', 'admin', '0', '1', '1449742779');
 INSERT INTO `pre_tag` VALUES ('27', '测试15', '1', 'admin', '0', '1', '1449742798');
 INSERT INTO `pre_tag` VALUES ('28', '测试16', '1', 'admin', '0', '1', '1449742883');
+INSERT INTO `pre_tag` VALUES ('29', '测试18', '1', 'admin', '0', '1', '1449803244');
 
 -- ----------------------------
 -- Table structure for `pre_tagid_aid`
@@ -268,13 +287,18 @@ CREATE TABLE `pre_tagid_aid` (
   `uid` mediumint(8) unsigned NOT NULL,
   `username` char(15) NOT NULL,
   `dateline` int(10) unsigned NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`id`),
+  KEY `tagid` (`tagid`),
+  KEY `aid` (`aid`)
+) ENGINE=MyISAM AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of pre_tagid_aid
 -- ----------------------------
 INSERT INTO `pre_tagid_aid` VALUES ('1', '13', '18', '1', 'admin', '1449743290');
+INSERT INTO `pre_tagid_aid` VALUES ('5', '14', '18', '1', 'admin', '1449802073');
+INSERT INTO `pre_tagid_aid` VALUES ('6', '15', '18', '1', 'admin', '1449802077');
+INSERT INTO `pre_tagid_aid` VALUES ('10', '29', '18', '1', 'admin', '1449803244');
 
 -- ----------------------------
 -- Table structure for `pre_users`

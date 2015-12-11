@@ -90,6 +90,12 @@ function bsetcookie($var, $value = '', $life = 0) {
 	$var=$config['cookiepre'].$var;
 	setcookie($var, $value, $life, $path, $config['cookiedomain']);
 }
+function getcookie($var){
+	global $_B;
+	$config = $_B['config']['cookie'];
+	$var=$config['cookiepre'].$var;
+	return $_COOKIE[$var];
+}
 //获取数据库缓存
 function loadcache($cachenames) {
 	global $_B;
@@ -183,7 +189,7 @@ function jsonOutput($status,$res=''){
 //	header("Content-type:application/json;charset=UTF-8");
 	$return['status']=$status;
 	$return['data']=$res;
-	echo json_encode($return);
+	echo json_encode($return,JSON_UNESCAPED_UNICODE);
 	exit(); 
 }
 

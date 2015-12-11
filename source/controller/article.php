@@ -4,7 +4,7 @@ if(!defined('BLOG')) {
 	exit('Access Denied');
 }
 
-$doarr=array('list','view','new','update');
+$doarr=array('list','view','new','update','zan');
 
 if(!in_array($do,$doarr)){
 	$do='list';
@@ -69,6 +69,10 @@ switch($do){
 				$next=1;
 			}
 		}
+		//获取标签
+		$article['tags'] = J::t('tagid_aid')->fetch_tags($article['aid']);
+		//增加查看次数
+		J::t('article')->addViews($article['aid']);
 
 		$_B['navtitle']=$article['subject'].' - '.$article['author'];
 		break;
@@ -129,9 +133,7 @@ switch($do){
 		if($_B['ajax'] && $_GET['type']=='update'){
 			$status=1;
 			$data='';
-			if(!$_B['uid']){
-				jsonOutput(2,'login');
-			}
+			checkLogin();
 			$aid=$_GET['aid'];
 			if(!$aid){
 				jsonOutput(2,'没有文章需要修改');
@@ -193,6 +195,33 @@ switch($do){
 		$aidattach = $article['image'] ? $article['aid'] : 0;
 		$defaultcontent=ubb2html($article['content'],$aidattach,'update');
 		$do='new';
+		break;
+	case 'zan':
+		if($_B['ajax']){
+			checkLogin();
+			$aid = $_GET['aid'];
+			if(!$aid){
+				jsonOutput(2,'缺少参数');
+			}
+			//删除成功
+			$resStatus = J::t('article_like')->delete('uid='.$_B['uid'].' AND aid='.$aid);
+			if($resStatus){
+				//已存在
+				J::t('article')->like($aid,'del');
+				jsonOutput(1,'del');
+			}else{
+				//不存在
+				J::t('article_like')->insert([
+					'uid'=>$_B['uid'],
+					'username'=>$_B['username'],
+					'aid'=>$aid,
+					'dateline'=>TIMESTAMP
+				]);
+				J::t('article')->like($aid);
+				jsonOutput(1,'add');
+			}
+			
+		}
 		break;
 }
 
