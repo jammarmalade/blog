@@ -1,7 +1,7 @@
 <?php if(!$_B['ajax']) { include display('header',''); ?><div class="container clearfix">
 <?php } ?>
 	
-	<div class="center-block" style="width:300px;">
+	<div class="center-block" style="width:300px;<?php if($_B['ajax']) { ?>margin:20px;<?php } ?>">
 		<input class="form-control" type="text" id="li_username" placeholder="昵称/邮箱" style="margin-bottom:10px;">
 		<input class="form-control" type="password" id="li_pwd" placeholder="密码" style="margin-bottom:10px;">
 		<div class="checkbox">

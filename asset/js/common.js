@@ -139,37 +139,6 @@ $(function(){
 	$('.login').click(function(){
 		showLogin();
 	})
-
-	$('#btn_login').unbind("click").click(function(){
-		var l_name=$.trim($('#li_username').val());
-		var l_pwd=$.trim($('#li_pwd').val());
-		var l_autologin=$('#li_autologin').is(':checked');
-		var loginbtn=1;
-		if(l_name=='' || l_pwd==''){
-			alert('用户名或密码不能为空');
-			$('#li_username').focus();
-			return false;
-		}
-		var data={username:l_name,pwd:l_pwd,autologin:l_autologin,loginbtn:loginbtn};
-		var url='index.php?m=user&do=login';
-		_ajax(url,data,function(res){
-			callback_login(res);
-		});
-		return false;
-	})
-	function callback_login(res){
-		ajaxSending=false;
-		if(res['status']==-1){
-			alert('请求失败');
-			return false;
-		}
-		if(res['status']==1){
-			window.location.reload();
-		}else{
-			$('#li_error').text(res['data']);
-		}
-		
-	}
 	
 	//dropdown
 	$('.dropdown').unbind("mouseover").mouseover(function(){
@@ -352,8 +321,36 @@ $(function(){
 function showLogin(){
 	$.post('?m=user&do=login',{},function(d){
 		var d = eval('('+d+')');
-		showDialog('登录',d['data'],'登录');
+		showDialog('登录',d['data'],'登录',function(){
+			var l_name=$.trim($('#li_username').val());
+			var l_pwd=$.trim($('#li_pwd').val());
+			var l_autologin=$('#li_autologin').is(':checked');
+			var loginbtn=1;
+			if(l_name=='' || l_pwd==''){
+				alert('用户名或密码不能为空');
+				$('#li_username').focus();
+				return false;
+			}
+			var data={username:l_name,pwd:l_pwd,autologin:l_autologin,loginbtn:loginbtn};
+			var url='index.php?m=user&do=login';
+			_ajax(url,data,function(res){
+				callback_login(res);
+			});
+			return false;
+		});
 	})
+}
+function callback_login(res){
+	ajaxSending=false;
+	if(res['status']==-1){
+		alert('请求失败');
+		return false;
+	}
+	if(res['status']==1){
+		window.location.reload();
+	}else{
+		$('#li_error').text(res['data']);
+	}
 }
 
 function showDialog(title,content,yestitle,yesfun){
