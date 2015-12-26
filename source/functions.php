@@ -582,6 +582,11 @@ function includeJSCSS($page='all'){
 		'debug' => JSDIR.'/common.js',
 		'online' => JSDIR.'/common.min.js',
 	);
+	//弹出层插件
+	$asset['all']['js'][]=array(
+		'debug' => 'asset/layer/layer.js',
+		'online' => 'asset/layer/layer.js',
+	);
 	//css 
 	$asset['all']['css'][]=array(
 		'debug' => CSSDIR.'/bootstrap.css',

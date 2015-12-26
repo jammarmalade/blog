@@ -136,6 +136,9 @@ $(function(){
 	}
 	//登录
 	//获取登录框视图模版
+	$('.login').click(function(){
+		showLogin();
+	})
 
 	$('#btn_login').unbind("click").click(function(){
 		var l_name=$.trim($('#li_username').val());
@@ -346,6 +349,46 @@ $(function(){
 	}
 	
 })
+function showLogin(){
+	$.post('?m=user&do=login',{},function(d){
+		var d = eval('('+d+')');
+		showDialog('登录',d['data'],'登录');
+	})
+}
+
+function showDialog(title,content,yestitle,yesfun){
+	if(isUndefined('yestitle')){
+		yestitle = '确认';
+	}
+	layer.open({
+		type: 1,//0（信息框，默认）1（页面层）2（iframe层）3（加载层）4（tips层）
+		title: title,
+		closeBtn: 1,//右上角关闭按钮
+		shade:0.1,//遮罩样式
+		shadeClose: false,//点击遮罩就关闭弹框
+		skin: '',//皮肤样式
+	//	area: ['500px', '300px'],//宽高
+		btn:[yestitle,'关闭'],//回调分别为 yes 和 cancel
+		yes:yesfun,
+		shift:0,//出场动画，0-6(css3 ie6-9不支持)
+		content: content
+	});
+}
+function showMessage(content,style){
+	//icon 1 成功 , 2 失败 , 3 询问 , 4 锁定 , 5 哭脸 , 6 笑脸
+	//layer.alert(content, {icon: 6});
+	if(in_array(style,[1,2,3,4,5,6])){
+		style = 1;
+	}
+	layer.open({
+		type: 0,//0（信息框，默认）1（页面层）2（iframe层）3（加载层）4（tips层）
+		title: '提示',
+		closeBtn: 1,//右上角关闭按钮
+		icon: style,//图标样式
+	//	time:3000,//自动关闭时间
+		content: content
+	});
+}
 //添加标签
 function addTag(id,tagname,type){
 	$('#tags_ipt_add').val("");

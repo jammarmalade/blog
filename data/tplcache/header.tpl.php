@@ -70,7 +70,7 @@
 			  </ul>
 			</li>
 		  <?php } else { ?>
-		    <li><a href="javascript:;" class="getLoginView"><span class="glyphicon glyphicon-user"></span> 登录</a></li>
+		    <li><a href="javascript:;" class="login"><span class="glyphicon glyphicon-user"></span> 登录</a></li>
 			<li><a href="index.php?m=user&do=reg"><span class="glyphicon glyphicon-piggy-bank"></span> 注册</a></li>
 		  <?php } ?>
 		  </ul>

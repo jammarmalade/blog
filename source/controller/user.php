@@ -99,43 +99,49 @@ switch($do){
 				jsonOutput(1);
 			}
 		}
-		if($_B['ajax'] && $_GET['loginbtn']){
-			$username=trim($_GET['username']);
-			$pwd=trim($_GET['pwd']);
-			$autologin=trim($_GET['autologin']);
-			if($username=='' || $pwd==''){
-				jsonOutput(2,'用户名或密码不能为空');
-			}
-			//失败次数 登录错误在十分钟内 且大于等于5次
-			if($failed=J::t('loginfailed')->fetch_ip($_B['clientip'])){
-				if((TIMESTAMP - $failed['lastupdate']) < 600 && $failed['count']>=5){
-					jsonOutput(2,'错误次数太多，请 10 分钟后再试');
+		if($_B['ajax']){
+			if($_GET['loginbtn']){
+				$username=trim($_GET['username']);
+				$pwd=trim($_GET['pwd']);
+				$autologin=trim($_GET['autologin']);
+				if($username=='' || $pwd==''){
+					jsonOutput(2,'用户名或密码不能为空');
 				}
-			}
-			if($uinfo=J::t('users')->login($username)){
-				$pwd=md5(md5($pwd).$uinfo['salt']);
-				if($uinfo['password'] != $pwd){
-					if($failed){
-						J::t('loginfailed')->update_by_pk(array('count'=>$failed['count']+1,'lastupdate'=>TIMESTAMP),$failed['ip']);
+				//失败次数 登录错误在十分钟内 且大于等于5次
+				if($failed=J::t('loginfailed')->fetch_ip($_B['clientip'])){
+					if((TIMESTAMP - $failed['lastupdate']) < 600 && $failed['count']>=5){
+						jsonOutput(2,'错误次数太多，请 10 分钟后再试');
+					}
+				}
+				if($uinfo=J::t('users')->login($username)){
+					$pwd=md5(md5($pwd).$uinfo['salt']);
+					if($uinfo['password'] != $pwd){
+						if($failed){
+							J::t('loginfailed')->update_by_pk(array('count'=>$failed['count']+1,'lastupdate'=>TIMESTAMP),$failed['ip']);
+						}else{
+							$insert=array(
+								'ip'=>$_B['clientip'],
+								'count'=>1,
+								'lastupdate'=>TIMESTAMP,
+							);
+							J::t('loginfailed')->insert($insert);
+						}
+						jsonOutput(2,'用户名或密码错误');
 					}else{
-						$insert=array(
-							'ip'=>$_B['clientip'],
-							'count'=>1,
-							'lastupdate'=>TIMESTAMP,
-						);
-						J::t('loginfailed')->insert($insert);
+						$cookietime=86400;
+						if($autologin){
+							$cookietime=2952000;
+						}
+						setloginstatus($uinfo,$cookietime);
+						jsonOutput(1);
 					}
-					jsonOutput(2,'用户名或密码错误');
 				}else{
-					$cookietime=86400;
-					if($autologin){
-						$cookietime=2952000;
-					}
-					setloginstatus($uinfo,$cookietime);
-					jsonOutput(1);
+					jsonOutput(2,'用户名或密码错误');
 				}
 			}else{
-				jsonOutput(2,'用户名或密码错误');
+				//ajax 返回登录html
+				$html = display('user_login',0,true,array('_B'=>$_B));
+				jsonOutput(1,$html);
 			}
 		}
 		$do = 'login';
