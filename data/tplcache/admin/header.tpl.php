@@ -13,6 +13,7 @@
     <![endif]-->
 	<script src="<?php echo JSDIR;?>/jquery.min.js"></script>
     <script src="<?php echo JSDIR;?>/bootstrap.min.js"></script>
+    <script src="<?php echo JSDIR;?>/autocomplete.min.js"></script>
 	<script src="<?php echo JSDIR;?>/common.js"></script>
 	<script src="<?php echo JSDIR;?>/admin.js"></script>
 	<script src="<?php echo JSDIR;?>/lazyload.js"></script>
